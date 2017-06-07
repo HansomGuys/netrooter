@@ -1,1 +1,1 @@
-P2P Video Application!
+P2P Application
