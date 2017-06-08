@@ -1,6 +1,6 @@
-package com.phicomm.netrooter.service;
+package com.phicomm.netrouter.service;
 
-import com.phicomm.netrooter.model.NrDevice;
+import com.phicomm.netrouter.model.NrDevice;
 
 public interface NrDeviceService {
 	NrDevice getDeviceByPrimaryKey(long deviceid);

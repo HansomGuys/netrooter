@@ -1,6 +1,6 @@
-package com.phicomm.netrooter.dao;
+package com.phicomm.netrouter.dao;
 
-import com.phicomm.netrooter.model.NrDevice;
+import com.phicomm.netrouter.model.NrDevice;
 
 public interface NrDeviceMapper {
     int deleteByPrimaryKey(Long deviceid);

@@ -1,11 +1,11 @@
-package com.phicomm.netrooter.service.impl;
+package com.phicomm.netrouter.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.phicomm.netrooter.dao.NrDeviceMapper;
-import com.phicomm.netrooter.model.NrDevice;
-import com.phicomm.netrooter.service.NrDeviceService;
+import com.phicomm.netrouter.dao.NrDeviceMapper;
+import com.phicomm.netrouter.model.NrDevice;
+import com.phicomm.netrouter.service.NrDeviceService;
 
 @Service("nrDeviceService")
 public class NrDeviceServiceImpl implements NrDeviceService {

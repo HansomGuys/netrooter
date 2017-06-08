@@ -1,7 +1,7 @@
-package com.phicomm.netrooter.dao;
+package com.phicomm.netrouter.dao;
 
-import com.phicomm.netrooter.model.DevNtwTopo;
-import com.phicomm.netrooter.model.DevNtwTopoKey;
+import com.phicomm.netrouter.model.DevNtwTopo;
+import com.phicomm.netrouter.model.DevNtwTopoKey;
 
 public interface DevNtwTopoMapper {
     int deleteByPrimaryKey(DevNtwTopoKey key);

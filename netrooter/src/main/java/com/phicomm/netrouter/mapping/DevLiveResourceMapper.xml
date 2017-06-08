@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.phicomm.netrooter.dao.DevLiveResourceMapper" >
-  <resultMap id="BaseResultMap" type="com.phicomm.netrooter.model.DevLiveResource" >
+<mapper namespace="com.phicomm.netrouter.dao.DevLiveResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.phicomm.netrouter.model.DevLiveResource" >
     <id column="resourceId" property="resourceid" jdbcType="BIGINT" />
     <id column="deviceId" property="deviceid" jdbcType="BIGINT" />
     <result column="path" property="path" jdbcType="VARCHAR" />
@@ -12,19 +12,19 @@
   <sql id="Base_Column_List" >
     resourceId, deviceId, path, bitrate, maxSlaveCnt, currentSlaveCnt
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.phicomm.netrooter.model.DevLiveResourceKey" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.phicomm.netrouter.model.DevLiveResourceKey" >
     select 
     <include refid="Base_Column_List" />
     from dev_live_resource
     where resourceId = #{resourceid,jdbcType=BIGINT}
       and deviceId = #{deviceid,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.phicomm.netrooter.model.DevLiveResourceKey" >
+  <delete id="deleteByPrimaryKey" parameterType="com.phicomm.netrouter.model.DevLiveResourceKey" >
     delete from dev_live_resource
     where resourceId = #{resourceid,jdbcType=BIGINT}
       and deviceId = #{deviceid,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.phicomm.netrooter.model.DevLiveResource" >
+  <insert id="insert" parameterType="com.phicomm.netrouter.model.DevLiveResource" >
     insert into dev_live_resource (resourceId, deviceId, path, 
       bitrate, maxSlaveCnt, currentSlaveCnt
       )
@@ -32,7 +32,7 @@
       #{bitrate,jdbcType=INTEGER}, #{maxslavecnt,jdbcType=INTEGER}, #{currentslavecnt,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.phicomm.netrooter.model.DevLiveResource" >
+  <insert id="insertSelective" parameterType="com.phicomm.netrouter.model.DevLiveResource" >
     insert into dev_live_resource
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="resourceid != null" >
@@ -75,7 +75,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.phicomm.netrooter.model.DevLiveResource" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.phicomm.netrouter.model.DevLiveResource" >
     update dev_live_resource
     <set >
       <if test="path != null" >
@@ -94,7 +94,7 @@
     where resourceId = #{resourceid,jdbcType=BIGINT}
       and deviceId = #{deviceid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.phicomm.netrooter.model.DevLiveResource" >
+  <update id="updateByPrimaryKey" parameterType="com.phicomm.netrouter.model.DevLiveResource" >
     update dev_live_resource
     set path = #{path,jdbcType=VARCHAR},
       bitrate = #{bitrate,jdbcType=INTEGER},

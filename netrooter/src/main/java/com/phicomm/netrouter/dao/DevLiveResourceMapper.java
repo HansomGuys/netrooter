@@ -1,7 +1,7 @@
-package com.phicomm.netrooter.dao;
+package com.phicomm.netrouter.dao;
 
-import com.phicomm.netrooter.model.DevLiveResource;
-import com.phicomm.netrooter.model.DevLiveResourceKey;
+import com.phicomm.netrouter.model.DevLiveResource;
+import com.phicomm.netrouter.model.DevLiveResourceKey;
 
 public interface DevLiveResourceMapper {
     int deleteByPrimaryKey(DevLiveResourceKey key);

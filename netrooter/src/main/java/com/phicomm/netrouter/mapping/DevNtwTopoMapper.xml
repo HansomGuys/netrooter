@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.phicomm.netrooter.dao.DevNtwTopoMapper" >
-  <resultMap id="BaseResultMap" type="com.phicomm.netrooter.model.DevNtwTopo" >
+<mapper namespace="com.phicomm.netrouter.dao.DevNtwTopoMapper" >
+  <resultMap id="BaseResultMap" type="com.phicomm.netrouter.model.DevNtwTopo" >
     <id column="deviceId" property="deviceid" jdbcType="BIGINT" />
     <id column="topoGroupId" property="topogroupid" jdbcType="BIGINT" />
     <result column="metricList" property="metriclist" jdbcType="VARCHAR" />
@@ -10,25 +10,25 @@
   <sql id="Base_Column_List" >
     deviceId, topoGroupId, metricList, publicIpAddr
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.phicomm.netrooter.model.DevNtwTopoKey" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.phicomm.netrouter.model.DevNtwTopoKey" >
     select 
     <include refid="Base_Column_List" />
     from dev_ntw_topo
     where deviceId = #{deviceid,jdbcType=BIGINT}
       and topoGroupId = #{topogroupid,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.phicomm.netrooter.model.DevNtwTopoKey" >
+  <delete id="deleteByPrimaryKey" parameterType="com.phicomm.netrouter.model.DevNtwTopoKey" >
     delete from dev_ntw_topo
     where deviceId = #{deviceid,jdbcType=BIGINT}
       and topoGroupId = #{topogroupid,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.phicomm.netrooter.model.DevNtwTopo" >
+  <insert id="insert" parameterType="com.phicomm.netrouter.model.DevNtwTopo" >
     insert into dev_ntw_topo (deviceId, topoGroupId, metricList, 
       publicIpAddr)
     values (#{deviceid,jdbcType=BIGINT}, #{topogroupid,jdbcType=BIGINT}, #{metriclist,jdbcType=VARCHAR}, 
       #{publicipaddr,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.phicomm.netrooter.model.DevNtwTopo" >
+  <insert id="insertSelective" parameterType="com.phicomm.netrouter.model.DevNtwTopo" >
     insert into dev_ntw_topo
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="deviceid != null" >
@@ -59,7 +59,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.phicomm.netrooter.model.DevNtwTopo" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.phicomm.netrouter.model.DevNtwTopo" >
     update dev_ntw_topo
     <set >
       <if test="metriclist != null" >
@@ -72,7 +72,7 @@
     where deviceId = #{deviceid,jdbcType=BIGINT}
       and topoGroupId = #{topogroupid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.phicomm.netrooter.model.DevNtwTopo" >
+  <update id="updateByPrimaryKey" parameterType="com.phicomm.netrouter.model.DevNtwTopo" >
     update dev_ntw_topo
     set metricList = #{metriclist,jdbcType=VARCHAR},
       publicIpAddr = #{publicipaddr,jdbcType=INTEGER}
