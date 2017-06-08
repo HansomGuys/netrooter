@@ -10,19 +10,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.alibaba.fastjson.JSON;
 import com.phicomm.netrooter.model.NrDevice;
 import com.phicomm.netrooter.service.NrDeviceService;
-@RunWith(SpringJUnit4ClassRunner.class)  
-@ContextConfiguration(locations = { "classpath:spring.xml",  
-        "classpath:spring-mybatis.xml" })
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:spring.xml", "classpath:spring-mybatis.xml" })
 public class NrDeviceServiceImplTest {
-	 private static final Logger LOGGER = Logger  
-	            .getLogger(NrDeviceServiceImplTest.class);  
-	  
-	    @Autowired  
-	    private NrDeviceService nrDeviceService;  
+	private static final Logger LOGGER = Logger.getLogger(NrDeviceServiceImplTest.class);
+
+	@Autowired
+	private NrDeviceService nrDeviceService;
+
 	@Test
 	public void testGetDeviceByPrimaryKey() {
-		 NrDevice device = nrDeviceService.getDeviceByPrimaryKey("1");  
-	        LOGGER.info(JSON.toJSON(device));  
+		NrDevice device = nrDeviceService.getDeviceByPrimaryKey(1);
+		LOGGER.info(JSON.toJSON(device));
 	}
 
 }

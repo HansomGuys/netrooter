@@ -19,13 +19,14 @@ USE `netrooter`;
 /*Table structure for table `dev_live_resource` */
 
 CREATE TABLE `dev_live_resource` (
-  `resourceId` varchar(50) NOT NULL,
-  `deviceId` varchar(50) NOT NULL,
+  `resourceId` bigint(20) NOT NULL,
+  `deviceId` bigint(20) NOT NULL,
   `path` varchar(300) DEFAULT NULL,
   `bitrate` int(11) DEFAULT NULL,
   `maxSlaveCnt` int(11) DEFAULT NULL,
   `currentSlaveCnt` int(11) DEFAULT NULL,
   PRIMARY KEY (`resourceId`,`deviceId`),
+  KEY `deviceId` (`deviceId`),
   CONSTRAINT `dev_live_resource_ibfk_1` FOREIGN KEY (`resourceId`) REFERENCES `live_info` (`resourceId`),
   CONSTRAINT `dev_live_resource_ibfk_2` FOREIGN KEY (`deviceId`) REFERENCES `nr_device` (`deviceId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -35,11 +36,12 @@ CREATE TABLE `dev_live_resource` (
 /*Table structure for table `dev_ntw_topo` */
 
 CREATE TABLE `dev_ntw_topo` (
-  `deviceId` varchar(50) NOT NULL,
-  `topoGroupId` varchar(50) NOT NULL,
+  `deviceId` bigint(20) NOT NULL,
+  `topoGroupId` bigint(20) NOT NULL,
   `metricList` varchar(150) DEFAULT NULL,
   `publicIpAddr` int(11) DEFAULT NULL,
   PRIMARY KEY (`deviceId`,`topoGroupId`),
+  KEY `topoGroupId` (`topoGroupId`),
   CONSTRAINT `dev_ntw_topo_ibfk_1` FOREIGN KEY (`deviceId`) REFERENCES `nr_device` (`deviceId`),
   CONSTRAINT `dev_ntw_topo_ibfk_2` FOREIGN KEY (`topoGroupId`) REFERENCES `topo_group` (`topoGroupId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -49,7 +51,7 @@ CREATE TABLE `dev_ntw_topo` (
 /*Table structure for table `live_info` */
 
 CREATE TABLE `live_info` (
-  `resourceId` varchar(50) NOT NULL,
+  `resourceId` bigint(20) NOT NULL,
   `provider` varchar(20) DEFAULT NULL,
   `filename` varchar(20) DEFAULT NULL,
   `location` varchar(10) DEFAULT NULL,
@@ -62,7 +64,7 @@ CREATE TABLE `live_info` (
 /*Table structure for table `nr_device` */
 
 CREATE TABLE `nr_device` (
-  `deviceId` varchar(50) NOT NULL,
+  `deviceId` bigint(50) NOT NULL,
   `manufacture` varchar(64) DEFAULT NULL,
   `manufactureSN` varchar(256) DEFAULT NULL,
   `online` tinyint(1) DEFAULT '0',
@@ -77,10 +79,12 @@ CREATE TABLE `nr_device` (
 
 /*Data for the table `nr_device` */
 
+insert  into `nr_device`(`deviceId`,`manufacture`,`manufactureSN`,`online`,`firstOnlineTime`,`latestOnlineTime`,`ipAddr`,`uplinkBw`,`downlinkBw`,`beMaster`) values (1,'fx','123',1,'2017-06-07 18:45:53',NULL,NULL,NULL,NULL,0);
+
 /*Table structure for table `topo_group` */
 
 CREATE TABLE `topo_group` (
-  `topoGroupId` varchar(50) NOT NULL,
+  `topoGroupId` bigint(50) NOT NULL,
   `avgdelay` int(11) DEFAULT NULL,
   `ISP` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`topoGroupId`)
