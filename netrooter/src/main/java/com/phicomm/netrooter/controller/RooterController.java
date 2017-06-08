@@ -11,14 +11,13 @@ import com.phicomm.netrooter.model.NrDevice;
 import com.phicomm.netrooter.service.NrDeviceService;
 
 @Controller  
-//@RequestMapping("/device")  
 public class RooterController {
 	@Autowired  
     private NrDeviceService nrDeviceService;  
       
     @RequestMapping("/showInfo/{deviceid}")  
     public @ResponseBody Object showNrDeviceInfo(ModelMap modelMap, @PathVariable int deviceid){  
-        NrDevice userInfo = nrDeviceService.getDeviceByPrimaryKey(deviceid+"");  
+        NrDevice userInfo = nrDeviceService.getDeviceByPrimaryKey(deviceid);  
         modelMap.addAttribute("userInfo", userInfo);  
         return modelMap;  
     }  

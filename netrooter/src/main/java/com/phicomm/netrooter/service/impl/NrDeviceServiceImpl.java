@@ -13,7 +13,7 @@ public class NrDeviceServiceImpl implements NrDeviceService {
 	@Autowired
 	private NrDeviceMapper nrDeviceMapper;
 	@Override
-	public NrDevice getDeviceByPrimaryKey(String deviceid) {
+	public NrDevice getDeviceByPrimaryKey(long deviceid) {
 		// TODO Auto-generated method stub
 		return nrDeviceMapper.selectByPrimaryKey(deviceid);
 	}
