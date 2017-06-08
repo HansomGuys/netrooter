@@ -1,6 +1,6 @@
-package com.phicomm.netrooter.dao;
+package com.phicomm.netrouter.dao;
 
-import com.phicomm.netrooter.model.LiveInfo;
+import com.phicomm.netrouter.model.LiveInfo;
 
 public interface LiveInfoMapper {
     int deleteByPrimaryKey(Long resourceid);

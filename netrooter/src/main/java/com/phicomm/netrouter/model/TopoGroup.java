@@ -1,4 +1,4 @@
-package com.phicomm.netrooter.model;
+package com.phicomm.netrouter.model;
 
 public class TopoGroup {
     private Long topogroupid;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.phicomm.netrooter.dao.TopoGroupMapper" >
-  <resultMap id="BaseResultMap" type="com.phicomm.netrooter.model.TopoGroup" >
+<mapper namespace="com.phicomm.netrouter.dao.TopoGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.phicomm.netrouter.model.TopoGroup" >
     <id column="topoGroupId" property="topogroupid" jdbcType="BIGINT" />
     <result column="avgdelay" property="avgdelay" jdbcType="INTEGER" />
     <result column="ISP" property="isp" jdbcType="VARCHAR" />
@@ -19,13 +19,13 @@
     delete from topo_group
     where topoGroupId = #{topogroupid,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.phicomm.netrooter.model.TopoGroup" >
+  <insert id="insert" parameterType="com.phicomm.netrouter.model.TopoGroup" >
     insert into topo_group (topoGroupId, avgdelay, ISP
       )
     values (#{topogroupid,jdbcType=BIGINT}, #{avgdelay,jdbcType=INTEGER}, #{isp,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.phicomm.netrooter.model.TopoGroup" >
+  <insert id="insertSelective" parameterType="com.phicomm.netrouter.model.TopoGroup" >
     insert into topo_group
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="topogroupid != null" >
@@ -50,7 +50,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.phicomm.netrooter.model.TopoGroup" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.phicomm.netrouter.model.TopoGroup" >
     update topo_group
     <set >
       <if test="avgdelay != null" >
@@ -62,7 +62,7 @@
     </set>
     where topoGroupId = #{topogroupid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.phicomm.netrooter.model.TopoGroup" >
+  <update id="updateByPrimaryKey" parameterType="com.phicomm.netrouter.model.TopoGroup" >
     update topo_group
     set avgdelay = #{avgdelay,jdbcType=INTEGER},
       ISP = #{isp,jdbcType=VARCHAR}

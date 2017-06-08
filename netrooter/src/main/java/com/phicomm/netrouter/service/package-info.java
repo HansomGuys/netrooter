@@ -5,4 +5,4 @@
  * @author chenglin02.wang
  *
  */
-package com.phicomm.netrooter.service;
+package com.phicomm.netrouter.service;

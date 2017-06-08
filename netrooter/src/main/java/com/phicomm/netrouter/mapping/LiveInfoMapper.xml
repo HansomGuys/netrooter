@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.phicomm.netrooter.dao.LiveInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.phicomm.netrooter.model.LiveInfo" >
+<mapper namespace="com.phicomm.netrouter.dao.LiveInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.phicomm.netrouter.model.LiveInfo" >
     <id column="resourceId" property="resourceid" jdbcType="BIGINT" />
     <result column="provider" property="provider" jdbcType="VARCHAR" />
     <result column="filename" property="filename" jdbcType="VARCHAR" />
@@ -21,13 +21,13 @@
     delete from live_info
     where resourceId = #{resourceid,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.phicomm.netrooter.model.LiveInfo" >
+  <insert id="insert" parameterType="com.phicomm.netrouter.model.LiveInfo" >
     insert into live_info (resourceId, provider, filename, 
       location, time)
     values (#{resourceid,jdbcType=BIGINT}, #{provider,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, 
       #{location,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.phicomm.netrooter.model.LiveInfo" >
+  <insert id="insertSelective" parameterType="com.phicomm.netrouter.model.LiveInfo" >
     insert into live_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="resourceid != null" >
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.phicomm.netrooter.model.LiveInfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.phicomm.netrouter.model.LiveInfo" >
     update live_info
     <set >
       <if test="provider != null" >
@@ -82,7 +82,7 @@
     </set>
     where resourceId = #{resourceid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.phicomm.netrooter.model.LiveInfo" >
+  <update id="updateByPrimaryKey" parameterType="com.phicomm.netrouter.model.LiveInfo" >
     update live_info
     set provider = #{provider,jdbcType=VARCHAR},
       filename = #{filename,jdbcType=VARCHAR},
