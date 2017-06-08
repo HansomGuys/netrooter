@@ -1,18 +1,18 @@
 package com.phicomm.netrooter.model;
 
 public class TopoGroup {
-    private String topogroupid;
+    private Long topogroupid;
 
     private Integer avgdelay;
 
     private String isp;
 
-    public String getTopogroupid() {
+    public Long getTopogroupid() {
         return topogroupid;
     }
 
-    public void setTopogroupid(String topogroupid) {
-        this.topogroupid = topogroupid == null ? null : topogroupid.trim();
+    public void setTopogroupid(Long topogroupid) {
+        this.topogroupid = topogroupid;
     }
 
     public Integer getAvgdelay() {

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.phicomm.netrooter.dao.LiveInfoMapper" >
   <resultMap id="BaseResultMap" type="com.phicomm.netrooter.model.LiveInfo" >
-    <id column="resourceId" property="resourceid" jdbcType="VARCHAR" />
+    <id column="resourceId" property="resourceid" jdbcType="BIGINT" />
     <result column="provider" property="provider" jdbcType="VARCHAR" />
     <result column="filename" property="filename" jdbcType="VARCHAR" />
     <result column="location" property="location" jdbcType="VARCHAR" />
@@ -11,20 +11,20 @@
   <sql id="Base_Column_List" >
     resourceId, provider, filename, location, time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from live_info
-    where resourceId = #{resourceid,jdbcType=VARCHAR}
+    where resourceId = #{resourceid,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from live_info
-    where resourceId = #{resourceid,jdbcType=VARCHAR}
+    where resourceId = #{resourceid,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.phicomm.netrooter.model.LiveInfo" >
     insert into live_info (resourceId, provider, filename, 
       location, time)
-    values (#{resourceid,jdbcType=VARCHAR}, #{provider,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, 
+    values (#{resourceid,jdbcType=BIGINT}, #{provider,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, 
       #{location,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.phicomm.netrooter.model.LiveInfo" >
@@ -48,7 +48,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="resourceid != null" >
-        #{resourceid,jdbcType=VARCHAR},
+        #{resourceid,jdbcType=BIGINT},
       </if>
       <if test="provider != null" >
         #{provider,jdbcType=VARCHAR},
@@ -80,7 +80,7 @@
         time = #{time,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where resourceId = #{resourceid,jdbcType=VARCHAR}
+    where resourceId = #{resourceid,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.phicomm.netrooter.model.LiveInfo" >
     update live_info
@@ -88,6 +88,6 @@
       filename = #{filename,jdbcType=VARCHAR},
       location = #{location,jdbcType=VARCHAR},
       time = #{time,jdbcType=TIMESTAMP}
-    where resourceId = #{resourceid,jdbcType=VARCHAR}
+    where resourceId = #{resourceid,jdbcType=BIGINT}
   </update>
 </mapper>

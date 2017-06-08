@@ -3,7 +3,7 @@ package com.phicomm.netrooter.model;
 import java.util.Date;
 
 public class LiveInfo {
-    private String resourceid;
+    private Long resourceid;
 
     private String provider;
 
@@ -13,12 +13,12 @@ public class LiveInfo {
 
     private Date time;
 
-    public String getResourceid() {
+    public Long getResourceid() {
         return resourceid;
     }
 
-    public void setResourceid(String resourceid) {
-        this.resourceid = resourceid == null ? null : resourceid.trim();
+    public void setResourceid(Long resourceid) {
+        this.resourceid = resourceid;
     }
 
     public String getProvider() {

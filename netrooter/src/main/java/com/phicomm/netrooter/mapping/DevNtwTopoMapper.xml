@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.phicomm.netrooter.dao.DevNtwTopoMapper" >
   <resultMap id="BaseResultMap" type="com.phicomm.netrooter.model.DevNtwTopo" >
-    <id column="deviceId" property="deviceid" jdbcType="VARCHAR" />
-    <id column="topoGroupId" property="topogroupid" jdbcType="VARCHAR" />
+    <id column="deviceId" property="deviceid" jdbcType="BIGINT" />
+    <id column="topoGroupId" property="topogroupid" jdbcType="BIGINT" />
     <result column="metricList" property="metriclist" jdbcType="VARCHAR" />
     <result column="publicIpAddr" property="publicipaddr" jdbcType="INTEGER" />
   </resultMap>
@@ -14,18 +14,18 @@
     select 
     <include refid="Base_Column_List" />
     from dev_ntw_topo
-    where deviceId = #{deviceid,jdbcType=VARCHAR}
-      and topoGroupId = #{topogroupid,jdbcType=VARCHAR}
+    where deviceId = #{deviceid,jdbcType=BIGINT}
+      and topoGroupId = #{topogroupid,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.phicomm.netrooter.model.DevNtwTopoKey" >
     delete from dev_ntw_topo
-    where deviceId = #{deviceid,jdbcType=VARCHAR}
-      and topoGroupId = #{topogroupid,jdbcType=VARCHAR}
+    where deviceId = #{deviceid,jdbcType=BIGINT}
+      and topoGroupId = #{topogroupid,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.phicomm.netrooter.model.DevNtwTopo" >
     insert into dev_ntw_topo (deviceId, topoGroupId, metricList, 
       publicIpAddr)
-    values (#{deviceid,jdbcType=VARCHAR}, #{topogroupid,jdbcType=VARCHAR}, #{metriclist,jdbcType=VARCHAR}, 
+    values (#{deviceid,jdbcType=BIGINT}, #{topogroupid,jdbcType=BIGINT}, #{metriclist,jdbcType=VARCHAR}, 
       #{publicipaddr,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.phicomm.netrooter.model.DevNtwTopo" >
@@ -46,10 +46,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="deviceid != null" >
-        #{deviceid,jdbcType=VARCHAR},
+        #{deviceid,jdbcType=BIGINT},
       </if>
       <if test="topogroupid != null" >
-        #{topogroupid,jdbcType=VARCHAR},
+        #{topogroupid,jdbcType=BIGINT},
       </if>
       <if test="metriclist != null" >
         #{metriclist,jdbcType=VARCHAR},
@@ -69,14 +69,14 @@
         publicIpAddr = #{publicipaddr,jdbcType=INTEGER},
       </if>
     </set>
-    where deviceId = #{deviceid,jdbcType=VARCHAR}
-      and topoGroupId = #{topogroupid,jdbcType=VARCHAR}
+    where deviceId = #{deviceid,jdbcType=BIGINT}
+      and topoGroupId = #{topogroupid,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.phicomm.netrooter.model.DevNtwTopo" >
     update dev_ntw_topo
     set metricList = #{metriclist,jdbcType=VARCHAR},
       publicIpAddr = #{publicipaddr,jdbcType=INTEGER}
-    where deviceId = #{deviceid,jdbcType=VARCHAR}
-      and topoGroupId = #{topogroupid,jdbcType=VARCHAR}
+    where deviceId = #{deviceid,jdbcType=BIGINT}
+      and topoGroupId = #{topogroupid,jdbcType=BIGINT}
   </update>
 </mapper>

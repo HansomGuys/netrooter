@@ -3,13 +3,13 @@ package com.phicomm.netrooter.dao;
 import com.phicomm.netrooter.model.TopoGroup;
 
 public interface TopoGroupMapper {
-    int deleteByPrimaryKey(String topogroupid);
+    int deleteByPrimaryKey(Long topogroupid);
 
     int insert(TopoGroup record);
 
     int insertSelective(TopoGroup record);
 
-    TopoGroup selectByPrimaryKey(String topogroupid);
+    TopoGroup selectByPrimaryKey(Long topogroupid);
 
     int updateByPrimaryKeySelective(TopoGroup record);
 

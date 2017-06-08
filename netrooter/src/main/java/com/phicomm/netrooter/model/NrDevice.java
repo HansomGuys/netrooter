@@ -3,7 +3,7 @@ package com.phicomm.netrooter.model;
 import java.util.Date;
 
 public class NrDevice {
-    private String deviceid;
+    private Long deviceid;
 
     private String manufacture;
 
@@ -23,12 +23,12 @@ public class NrDevice {
 
     private Boolean bemaster;
 
-    public String getDeviceid() {
+    public Long getDeviceid() {
         return deviceid;
     }
 
-    public void setDeviceid(String deviceid) {
-        this.deviceid = deviceid == null ? null : deviceid.trim();
+    public void setDeviceid(Long deviceid) {
+        this.deviceid = deviceid;
     }
 
     public String getManufacture() {

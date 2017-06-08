@@ -3,13 +3,13 @@ package com.phicomm.netrooter.dao;
 import com.phicomm.netrooter.model.NrDevice;
 
 public interface NrDeviceMapper {
-    int deleteByPrimaryKey(String deviceid);
+    int deleteByPrimaryKey(Long deviceid);
 
     int insert(NrDevice record);
 
     int insertSelective(NrDevice record);
 
-    NrDevice selectByPrimaryKey(String deviceid);
+    NrDevice selectByPrimaryKey(Long deviceid);
 
     int updateByPrimaryKeySelective(NrDevice record);
 

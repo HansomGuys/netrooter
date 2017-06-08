@@ -1,23 +1,23 @@
 package com.phicomm.netrooter.model;
 
 public class DevLiveResourceKey {
-    private String resourceid;
+    private Long resourceid;
 
-    private String deviceid;
+    private Long deviceid;
 
-    public String getResourceid() {
+    public Long getResourceid() {
         return resourceid;
     }
 
-    public void setResourceid(String resourceid) {
-        this.resourceid = resourceid == null ? null : resourceid.trim();
+    public void setResourceid(Long resourceid) {
+        this.resourceid = resourceid;
     }
 
-    public String getDeviceid() {
+    public Long getDeviceid() {
         return deviceid;
     }
 
-    public void setDeviceid(String deviceid) {
-        this.deviceid = deviceid == null ? null : deviceid.trim();
+    public void setDeviceid(Long deviceid) {
+        this.deviceid = deviceid;
     }
 }

@@ -1,23 +1,23 @@
 package com.phicomm.netrooter.model;
 
 public class DevNtwTopoKey {
-    private String deviceid;
+    private Long deviceid;
 
-    private String topogroupid;
+    private Long topogroupid;
 
-    public String getDeviceid() {
+    public Long getDeviceid() {
         return deviceid;
     }
 
-    public void setDeviceid(String deviceid) {
-        this.deviceid = deviceid == null ? null : deviceid.trim();
+    public void setDeviceid(Long deviceid) {
+        this.deviceid = deviceid;
     }
 
-    public String getTopogroupid() {
+    public Long getTopogroupid() {
         return topogroupid;
     }
 
-    public void setTopogroupid(String topogroupid) {
-        this.topogroupid = topogroupid == null ? null : topogroupid.trim();
+    public void setTopogroupid(Long topogroupid) {
+        this.topogroupid = topogroupid;
     }
 }
