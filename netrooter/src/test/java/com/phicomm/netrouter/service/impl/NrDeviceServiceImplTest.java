@@ -1,4 +1,4 @@
-package com.phicomm.netrooter.service.impl;
+package com.phicomm.netrouter.service.impl;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -8,8 +8,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alibaba.fastjson.JSON;
-import com.phicomm.netrooter.model.NrDevice;
-import com.phicomm.netrooter.service.NrDeviceService;
+import com.phicomm.netrouter.model.NrDevice;
+import com.phicomm.netrouter.service.NrDeviceService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring.xml", "classpath:spring-mybatis.xml" })
