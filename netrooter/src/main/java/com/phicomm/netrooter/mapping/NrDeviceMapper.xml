@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.phicomm.netrooter.dao.NrDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.phicomm.netrooter.model.NrDevice" >
+    <id column="deviceId" property="deviceid" jdbcType="BIGINT" />
+    <result column="manufacture" property="manufacture" jdbcType="VARCHAR" />
+    <result column="manufactureSN" property="manufacturesn" jdbcType="VARCHAR" />
+    <result column="online" property="online" jdbcType="BIT" />
+    <result column="firstOnlineTime" property="firstonlinetime" jdbcType="TIMESTAMP" />
+    <result column="latestOnlineTime" property="latestonlinetime" jdbcType="TIMESTAMP" />
+    <result column="ipAddr" property="ipaddr" jdbcType="INTEGER" />
+    <result column="uplinkBw" property="uplinkbw" jdbcType="INTEGER" />
+    <result column="downlinkBw" property="downlinkbw" jdbcType="INTEGER" />
+    <result column="beMaster" property="bemaster" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    deviceId, manufacture, manufactureSN, online, firstOnlineTime, latestOnlineTime, 
+    ipAddr, uplinkBw, downlinkBw, beMaster
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from nr_device
+    where deviceId = #{deviceid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from nr_device
+    where deviceId = #{deviceid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.phicomm.netrooter.model.NrDevice" >
+    insert into nr_device (deviceId, manufacture, manufactureSN, 
+      online, firstOnlineTime, latestOnlineTime, 
+      ipAddr, uplinkBw, downlinkBw, 
+      beMaster)
+    values (#{deviceid,jdbcType=BIGINT}, #{manufacture,jdbcType=VARCHAR}, #{manufacturesn,jdbcType=VARCHAR}, 
+      #{online,jdbcType=BIT}, #{firstonlinetime,jdbcType=TIMESTAMP}, #{latestonlinetime,jdbcType=TIMESTAMP}, 
+      #{ipaddr,jdbcType=INTEGER}, #{uplinkbw,jdbcType=INTEGER}, #{downlinkbw,jdbcType=INTEGER}, 
+      #{bemaster,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.phicomm.netrooter.model.NrDevice" >
+    insert into nr_device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deviceid != null" >
+        deviceId,
+      </if>
+      <if test="manufacture != null" >
+        manufacture,
+      </if>
+      <if test="manufacturesn != null" >
+        manufactureSN,
+      </if>
+      <if test="online != null" >
+        online,
+      </if>
+      <if test="firstonlinetime != null" >
+        firstOnlineTime,
+      </if>
+      <if test="latestonlinetime != null" >
+        latestOnlineTime,
+      </if>
+      <if test="ipaddr != null" >
+        ipAddr,
+      </if>
+      <if test="uplinkbw != null" >
+        uplinkBw,
+      </if>
+      <if test="downlinkbw != null" >
+        downlinkBw,
+      </if>
+      <if test="bemaster != null" >
+        beMaster,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deviceid != null" >
+        #{deviceid,jdbcType=BIGINT},
+      </if>
+      <if test="manufacture != null" >
+        #{manufacture,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturesn != null" >
+        #{manufacturesn,jdbcType=VARCHAR},
+      </if>
+      <if test="online != null" >
+        #{online,jdbcType=BIT},
+      </if>
+      <if test="firstonlinetime != null" >
+        #{firstonlinetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="latestonlinetime != null" >
+        #{latestonlinetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipaddr != null" >
+        #{ipaddr,jdbcType=INTEGER},
+      </if>
+      <if test="uplinkbw != null" >
+        #{uplinkbw,jdbcType=INTEGER},
+      </if>
+      <if test="downlinkbw != null" >
+        #{downlinkbw,jdbcType=INTEGER},
+      </if>
+      <if test="bemaster != null" >
+        #{bemaster,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.phicomm.netrooter.model.NrDevice" >
+    update nr_device
+    <set >
+      <if test="manufacture != null" >
+        manufacture = #{manufacture,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturesn != null" >
+        manufactureSN = #{manufacturesn,jdbcType=VARCHAR},
+      </if>
+      <if test="online != null" >
+        online = #{online,jdbcType=BIT},
+      </if>
+      <if test="firstonlinetime != null" >
+        firstOnlineTime = #{firstonlinetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="latestonlinetime != null" >
+        latestOnlineTime = #{latestonlinetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipaddr != null" >
+        ipAddr = #{ipaddr,jdbcType=INTEGER},
+      </if>
+      <if test="uplinkbw != null" >
+        uplinkBw = #{uplinkbw,jdbcType=INTEGER},
+      </if>
+      <if test="downlinkbw != null" >
+        downlinkBw = #{downlinkbw,jdbcType=INTEGER},
+      </if>
+      <if test="bemaster != null" >
+        beMaster = #{bemaster,jdbcType=BIT},
+      </if>
+    </set>
+    where deviceId = #{deviceid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phicomm.netrooter.model.NrDevice" >
+    update nr_device
+    set manufacture = #{manufacture,jdbcType=VARCHAR},
+      manufactureSN = #{manufacturesn,jdbcType=VARCHAR},
+      online = #{online,jdbcType=BIT},
+      firstOnlineTime = #{firstonlinetime,jdbcType=TIMESTAMP},
+      latestOnlineTime = #{latestonlinetime,jdbcType=TIMESTAMP},
+      ipAddr = #{ipaddr,jdbcType=INTEGER},
+      uplinkBw = #{uplinkbw,jdbcType=INTEGER},
+      downlinkBw = #{downlinkbw,jdbcType=INTEGER},
+      beMaster = #{bemaster,jdbcType=BIT}
+    where deviceId = #{deviceid,jdbcType=BIGINT}
+  </update>
+</mapper>
