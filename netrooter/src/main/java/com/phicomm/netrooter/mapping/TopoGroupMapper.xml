@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.phicomm.netrooter.dao.TopoGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.phicomm.netrooter.model.TopoGroup" >
+    <id column="topoGroupId" property="topogroupid" jdbcType="BIGINT" />
+    <result column="avgdelay" property="avgdelay" jdbcType="INTEGER" />
+    <result column="ISP" property="isp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    topoGroupId, avgdelay, ISP
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from topo_group
+    where topoGroupId = #{topogroupid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from topo_group
+    where topoGroupId = #{topogroupid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.phicomm.netrooter.model.TopoGroup" >
+    insert into topo_group (topoGroupId, avgdelay, ISP
+      )
+    values (#{topogroupid,jdbcType=BIGINT}, #{avgdelay,jdbcType=INTEGER}, #{isp,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.phicomm.netrooter.model.TopoGroup" >
+    insert into topo_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="topogroupid != null" >
+        topoGroupId,
+      </if>
+      <if test="avgdelay != null" >
+        avgdelay,
+      </if>
+      <if test="isp != null" >
+        ISP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="topogroupid != null" >
+        #{topogroupid,jdbcType=BIGINT},
+      </if>
+      <if test="avgdelay != null" >
+        #{avgdelay,jdbcType=INTEGER},
+      </if>
+      <if test="isp != null" >
+        #{isp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.phicomm.netrooter.model.TopoGroup" >
+    update topo_group
+    <set >
+      <if test="avgdelay != null" >
+        avgdelay = #{avgdelay,jdbcType=INTEGER},
+      </if>
+      <if test="isp != null" >
+        ISP = #{isp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where topoGroupId = #{topogroupid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phicomm.netrooter.model.TopoGroup" >
+    update topo_group
+    set avgdelay = #{avgdelay,jdbcType=INTEGER},
+      ISP = #{isp,jdbcType=VARCHAR}
+    where topoGroupId = #{topogroupid,jdbcType=BIGINT}
+  </update>
+</mapper>

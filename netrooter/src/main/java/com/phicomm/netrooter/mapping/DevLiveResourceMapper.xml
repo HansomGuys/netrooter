@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.phicomm.netrooter.dao.DevLiveResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.phicomm.netrooter.model.DevLiveResource" >
+    <id column="resourceId" property="resourceid" jdbcType="BIGINT" />
+    <id column="deviceId" property="deviceid" jdbcType="BIGINT" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="bitrate" property="bitrate" jdbcType="INTEGER" />
+    <result column="maxSlaveCnt" property="maxslavecnt" jdbcType="INTEGER" />
+    <result column="currentSlaveCnt" property="currentslavecnt" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    resourceId, deviceId, path, bitrate, maxSlaveCnt, currentSlaveCnt
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.phicomm.netrooter.model.DevLiveResourceKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from dev_live_resource
+    where resourceId = #{resourceid,jdbcType=BIGINT}
+      and deviceId = #{deviceid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.phicomm.netrooter.model.DevLiveResourceKey" >
+    delete from dev_live_resource
+    where resourceId = #{resourceid,jdbcType=BIGINT}
+      and deviceId = #{deviceid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.phicomm.netrooter.model.DevLiveResource" >
+    insert into dev_live_resource (resourceId, deviceId, path, 
+      bitrate, maxSlaveCnt, currentSlaveCnt
+      )
+    values (#{resourceid,jdbcType=BIGINT}, #{deviceid,jdbcType=BIGINT}, #{path,jdbcType=VARCHAR}, 
+      #{bitrate,jdbcType=INTEGER}, #{maxslavecnt,jdbcType=INTEGER}, #{currentslavecnt,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.phicomm.netrooter.model.DevLiveResource" >
+    insert into dev_live_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resourceid != null" >
+        resourceId,
+      </if>
+      <if test="deviceid != null" >
+        deviceId,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="bitrate != null" >
+        bitrate,
+      </if>
+      <if test="maxslavecnt != null" >
+        maxSlaveCnt,
+      </if>
+      <if test="currentslavecnt != null" >
+        currentSlaveCnt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resourceid != null" >
+        #{resourceid,jdbcType=BIGINT},
+      </if>
+      <if test="deviceid != null" >
+        #{deviceid,jdbcType=BIGINT},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="bitrate != null" >
+        #{bitrate,jdbcType=INTEGER},
+      </if>
+      <if test="maxslavecnt != null" >
+        #{maxslavecnt,jdbcType=INTEGER},
+      </if>
+      <if test="currentslavecnt != null" >
+        #{currentslavecnt,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.phicomm.netrooter.model.DevLiveResource" >
+    update dev_live_resource
+    <set >
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="bitrate != null" >
+        bitrate = #{bitrate,jdbcType=INTEGER},
+      </if>
+      <if test="maxslavecnt != null" >
+        maxSlaveCnt = #{maxslavecnt,jdbcType=INTEGER},
+      </if>
+      <if test="currentslavecnt != null" >
+        currentSlaveCnt = #{currentslavecnt,jdbcType=INTEGER},
+      </if>
+    </set>
+    where resourceId = #{resourceid,jdbcType=BIGINT}
+      and deviceId = #{deviceid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phicomm.netrooter.model.DevLiveResource" >
+    update dev_live_resource
+    set path = #{path,jdbcType=VARCHAR},
+      bitrate = #{bitrate,jdbcType=INTEGER},
+      maxSlaveCnt = #{maxslavecnt,jdbcType=INTEGER},
+      currentSlaveCnt = #{currentslavecnt,jdbcType=INTEGER}
+    where resourceId = #{resourceid,jdbcType=BIGINT}
+      and deviceId = #{deviceid,jdbcType=BIGINT}
+  </update>
+</mapper>
