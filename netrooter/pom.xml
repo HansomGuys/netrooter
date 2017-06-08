@@ -5,7 +5,7 @@
 	<artifactId>netrooter</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>netrooter Maven Webapp</name>
+	<name>netrooter</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<!-- 开发阶段配置文件位置, 发布时打包加参数：-P product -->
