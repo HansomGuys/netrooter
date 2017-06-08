@@ -1,4 +1,4 @@
-package com.phicomm.netrooter.model;
+package com.phicomm.netrouter.model;
 
 import java.util.Date;
 

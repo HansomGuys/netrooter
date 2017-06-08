@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.phicomm.netrooter.dao.NrDeviceMapper" >
-  <resultMap id="BaseResultMap" type="com.phicomm.netrooter.model.NrDevice" >
+<mapper namespace="com.phicomm.netrouter.dao.NrDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.phicomm.netrouter.model.NrDevice" >
     <id column="deviceId" property="deviceid" jdbcType="BIGINT" />
     <result column="manufacture" property="manufacture" jdbcType="VARCHAR" />
     <result column="manufactureSN" property="manufacturesn" jdbcType="VARCHAR" />
@@ -27,7 +27,7 @@
     delete from nr_device
     where deviceId = #{deviceid,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.phicomm.netrooter.model.NrDevice" >
+  <insert id="insert" parameterType="com.phicomm.netrouter.model.NrDevice" >
     insert into nr_device (deviceId, manufacture, manufactureSN, 
       online, firstOnlineTime, latestOnlineTime, 
       ipAddr, uplinkBw, downlinkBw, 
@@ -37,7 +37,7 @@
       #{ipaddr,jdbcType=INTEGER}, #{uplinkbw,jdbcType=INTEGER}, #{downlinkbw,jdbcType=INTEGER}, 
       #{bemaster,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.phicomm.netrooter.model.NrDevice" >
+  <insert id="insertSelective" parameterType="com.phicomm.netrouter.model.NrDevice" >
     insert into nr_device
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="deviceid != null" >
@@ -104,7 +104,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.phicomm.netrooter.model.NrDevice" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.phicomm.netrouter.model.NrDevice" >
     update nr_device
     <set >
       <if test="manufacture != null" >
@@ -137,7 +137,7 @@
     </set>
     where deviceId = #{deviceid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.phicomm.netrooter.model.NrDevice" >
+  <update id="updateByPrimaryKey" parameterType="com.phicomm.netrouter.model.NrDevice" >
     update nr_device
     set manufacture = #{manufacture,jdbcType=VARCHAR},
       manufactureSN = #{manufacturesn,jdbcType=VARCHAR},

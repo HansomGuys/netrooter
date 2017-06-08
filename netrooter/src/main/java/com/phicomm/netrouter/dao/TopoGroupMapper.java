@@ -1,6 +1,6 @@
-package com.phicomm.netrooter.dao;
+package com.phicomm.netrouter.dao;
 
-import com.phicomm.netrooter.model.TopoGroup;
+import com.phicomm.netrouter.model.TopoGroup;
 
 public interface TopoGroupMapper {
     int deleteByPrimaryKey(Long topogroupid);

@@ -5,4 +5,4 @@
  * @author chenglin02.wang
  *
  */
-package com.phicomm.netrooter.controller;
+package com.phicomm.netrouter.service.impl;
