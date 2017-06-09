@@ -7,9 +7,9 @@ public class LiveInfo {
 
     private String provider;
 
-    private String filename;
+    private String path;
 
-    private String location;
+    private String host;
 
     private Date time;
 
@@ -29,20 +29,20 @@ public class LiveInfo {
         this.provider = provider == null ? null : provider.trim();
     }
 
-    public String getFilename() {
-        return filename;
+    public String getPath() {
+        return path;
     }
 
-    public void setFilename(String filename) {
-        this.filename = filename == null ? null : filename.trim();
+    public void setPath(String path) {
+        this.path = path == null ? null : path.trim();
     }
 
-    public String getLocation() {
-        return location;
+    public String getHost() {
+        return host;
     }
 
-    public void setLocation(String location) {
-        this.location = location == null ? null : location.trim();
+    public void setHost(String host) {
+        this.host = host == null ? null : host.trim();
     }
 
     public Date getTime() {

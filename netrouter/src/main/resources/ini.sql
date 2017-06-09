@@ -32,7 +32,7 @@ CREATE TABLE `live_info` (
 /*Table structure for table `iot_device` */
 
 CREATE TABLE `iot_device` (
-  `deviceId` bigint(50) NOT NULL,
+  `deviceId` bigint(50) NOT NULL AUTO_INCREMENT,
   `manufacture` varchar(64) DEFAULT NULL,
   `manufactureSN` varchar(256) DEFAULT NULL,
   `online` tinyint(1) DEFAULT '0',

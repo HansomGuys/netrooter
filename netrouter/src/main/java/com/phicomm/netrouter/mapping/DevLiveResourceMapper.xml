@@ -4,13 +4,13 @@
   <resultMap id="BaseResultMap" type="com.phicomm.netrouter.model.DevLiveResource" >
     <id column="resourceId" property="resourceid" jdbcType="BIGINT" />
     <id column="deviceId" property="deviceid" jdbcType="BIGINT" />
-    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="bitrate" property="bitrate" jdbcType="INTEGER" />
     <result column="maxSlaveCnt" property="maxslavecnt" jdbcType="INTEGER" />
     <result column="currentSlaveCnt" property="currentslavecnt" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    resourceId, deviceId, path, bitrate, maxSlaveCnt, currentSlaveCnt
+    resourceId, deviceId, url, bitrate, maxSlaveCnt, currentSlaveCnt
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.phicomm.netrouter.model.DevLiveResourceKey" >
     select 
@@ -25,10 +25,10 @@
       and deviceId = #{deviceid,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.phicomm.netrouter.model.DevLiveResource" >
-    insert into dev_live_resource (resourceId, deviceId, path, 
+    insert into dev_live_resource (resourceId, deviceId, url, 
       bitrate, maxSlaveCnt, currentSlaveCnt
       )
-    values (#{resourceid,jdbcType=BIGINT}, #{deviceid,jdbcType=BIGINT}, #{path,jdbcType=VARCHAR}, 
+    values (#{resourceid,jdbcType=BIGINT}, #{deviceid,jdbcType=BIGINT}, #{url,jdbcType=VARCHAR}, 
       #{bitrate,jdbcType=INTEGER}, #{maxslavecnt,jdbcType=INTEGER}, #{currentslavecnt,jdbcType=INTEGER}
       )
   </insert>
@@ -41,8 +41,8 @@
       <if test="deviceid != null" >
         deviceId,
       </if>
-      <if test="path != null" >
-        path,
+      <if test="url != null" >
+        url,
       </if>
       <if test="bitrate != null" >
         bitrate,
@@ -61,8 +61,8 @@
       <if test="deviceid != null" >
         #{deviceid,jdbcType=BIGINT},
       </if>
-      <if test="path != null" >
-        #{path,jdbcType=VARCHAR},
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
       </if>
       <if test="bitrate != null" >
         #{bitrate,jdbcType=INTEGER},
@@ -78,8 +78,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.phicomm.netrouter.model.DevLiveResource" >
     update dev_live_resource
     <set >
-      <if test="path != null" >
-        path = #{path,jdbcType=VARCHAR},
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
       </if>
       <if test="bitrate != null" >
         bitrate = #{bitrate,jdbcType=INTEGER},
@@ -96,7 +96,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.phicomm.netrouter.model.DevLiveResource" >
     update dev_live_resource
-    set path = #{path,jdbcType=VARCHAR},
+    set url = #{url,jdbcType=VARCHAR},
       bitrate = #{bitrate,jdbcType=INTEGER},
       maxSlaveCnt = #{maxslavecnt,jdbcType=INTEGER},
       currentSlaveCnt = #{currentslavecnt,jdbcType=INTEGER}
