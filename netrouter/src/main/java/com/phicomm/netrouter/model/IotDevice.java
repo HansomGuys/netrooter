@@ -2,7 +2,7 @@ package com.phicomm.netrouter.model;
 
 import java.util.Date;
 
-public class NrDevice {
+public class IotDevice {
     private Long deviceid;
 
     private String manufacture;

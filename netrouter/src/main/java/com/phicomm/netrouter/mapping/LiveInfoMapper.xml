@@ -4,12 +4,12 @@
   <resultMap id="BaseResultMap" type="com.phicomm.netrouter.model.LiveInfo" >
     <id column="resourceId" property="resourceid" jdbcType="BIGINT" />
     <result column="provider" property="provider" jdbcType="VARCHAR" />
-    <result column="filename" property="filename" jdbcType="VARCHAR" />
-    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="host" property="host" jdbcType="VARCHAR" />
     <result column="time" property="time" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    resourceId, provider, filename, location, time
+    resourceId, provider, path, host, time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -22,10 +22,10 @@
     where resourceId = #{resourceid,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.phicomm.netrouter.model.LiveInfo" >
-    insert into live_info (resourceId, provider, filename, 
-      location, time)
-    values (#{resourceid,jdbcType=BIGINT}, #{provider,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, 
-      #{location,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP})
+    insert into live_info (resourceId, provider, path, 
+      host, time)
+    values (#{resourceid,jdbcType=BIGINT}, #{provider,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{host,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.phicomm.netrouter.model.LiveInfo" >
     insert into live_info
@@ -36,11 +36,11 @@
       <if test="provider != null" >
         provider,
       </if>
-      <if test="filename != null" >
-        filename,
+      <if test="path != null" >
+        path,
       </if>
-      <if test="location != null" >
-        location,
+      <if test="host != null" >
+        host,
       </if>
       <if test="time != null" >
         time,
@@ -53,11 +53,11 @@
       <if test="provider != null" >
         #{provider,jdbcType=VARCHAR},
       </if>
-      <if test="filename != null" >
-        #{filename,jdbcType=VARCHAR},
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
       </if>
-      <if test="location != null" >
-        #{location,jdbcType=VARCHAR},
+      <if test="host != null" >
+        #{host,jdbcType=VARCHAR},
       </if>
       <if test="time != null" >
         #{time,jdbcType=TIMESTAMP},
@@ -70,11 +70,11 @@
       <if test="provider != null" >
         provider = #{provider,jdbcType=VARCHAR},
       </if>
-      <if test="filename != null" >
-        filename = #{filename,jdbcType=VARCHAR},
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
       </if>
-      <if test="location != null" >
-        location = #{location,jdbcType=VARCHAR},
+      <if test="host != null" >
+        host = #{host,jdbcType=VARCHAR},
       </if>
       <if test="time != null" >
         time = #{time,jdbcType=TIMESTAMP},
@@ -85,8 +85,8 @@
   <update id="updateByPrimaryKey" parameterType="com.phicomm.netrouter.model.LiveInfo" >
     update live_info
     set provider = #{provider,jdbcType=VARCHAR},
-      filename = #{filename,jdbcType=VARCHAR},
-      location = #{location,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      host = #{host,jdbcType=VARCHAR},
       time = #{time,jdbcType=TIMESTAMP}
     where resourceId = #{resourceid,jdbcType=BIGINT}
   </update>

@@ -1,7 +1,7 @@
 package com.phicomm.netrouter.model;
 
 public class DevLiveResource extends DevLiveResourceKey {
-    private String path;
+    private String url;
 
     private Integer bitrate;
 
@@ -9,12 +9,12 @@ public class DevLiveResource extends DevLiveResourceKey {
 
     private Integer currentslavecnt;
 
-    public String getPath() {
-        return path;
+    public String getUrl() {
+        return url;
     }
 
-    public void setPath(String path) {
-        this.path = path == null ? null : path.trim();
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
     }
 
     public Integer getBitrate() {
