@@ -13,8 +13,8 @@ import com.phicomm.netrouter.service.IotDeviceService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring.xml", "classpath:spring-mybatis.xml" })
-public class NrDeviceServiceImplTest {
-	private static final Logger LOGGER = Logger.getLogger(NrDeviceServiceImplTest.class);
+public class IotDeviceServiceImplTest {
+	private static final Logger LOGGER = Logger.getLogger(IotDeviceServiceImplTest.class);
 
 	@Autowired
 	private IotDeviceService nrDeviceService;
