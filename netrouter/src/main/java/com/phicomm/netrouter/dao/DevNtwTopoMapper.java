@@ -6,7 +6,7 @@ import com.phicomm.netrouter.model.DevNtwTopoKey;
 public interface DevNtwTopoMapper {
     int deleteByPrimaryKey(DevNtwTopoKey key);
 
-    int insert(DevNtwTopo record);
+    int insertDevNtwTopo(DevNtwTopo record);
 
     int insertSelective(DevNtwTopo record);
 

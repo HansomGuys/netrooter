@@ -3,7 +3,7 @@ package com.phicomm.netrouter.model;
 public class DevNtwTopo extends DevNtwTopoKey {
     private String metriclist;
 
-    private Integer publicipaddr;
+    private String publicipaddr;
 
     public String getMetriclist() {
         return metriclist;
@@ -13,11 +13,11 @@ public class DevNtwTopo extends DevNtwTopoKey {
         this.metriclist = metriclist == null ? null : metriclist.trim();
     }
 
-    public Integer getPublicipaddr() {
+    public String getPublicipaddr() {
         return publicipaddr;
     }
 
-    public void setPublicipaddr(Integer publicipaddr) {
+    public void setPublicipaddr(String publicipaddr) {
         this.publicipaddr = publicipaddr;
     }
 }

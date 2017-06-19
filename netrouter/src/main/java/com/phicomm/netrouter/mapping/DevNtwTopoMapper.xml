@@ -22,7 +22,7 @@
     where deviceId = #{deviceid,jdbcType=BIGINT}
       and topoGroupId = #{topogroupid,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.phicomm.netrouter.model.DevNtwTopo" >
+  <insert id="insertDevNtwTopo" parameterType="com.phicomm.netrouter.model.DevNtwTopo" >
     insert into dev_ntw_topo (deviceId, topoGroupId, metricList, 
       publicIpAddr)
     values (#{deviceid,jdbcType=BIGINT}, #{topogroupid,jdbcType=BIGINT}, #{metriclist,jdbcType=VARCHAR}, 

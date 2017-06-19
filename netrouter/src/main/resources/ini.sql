@@ -38,7 +38,7 @@ CREATE TABLE `iot_device` (
   `online` tinyint(1) DEFAULT '0',
   `firstOnlineTime` timestamp NULL DEFAULT NULL,
   `latestOnlineTime` timestamp NULL DEFAULT NULL,
-  `ipAddr` int(11) DEFAULT NULL,
+  `ipAddr` varchar(20) DEFAULT NULL,
   `uplinkBw` int(11) DEFAULT NULL,
   `downlinkBw` int(11) DEFAULT NULL,
   `beMaster` tinyint(1) DEFAULT '0',
