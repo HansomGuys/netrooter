@@ -31,11 +31,6 @@ public class NRServiceImpl implements NRService {
 		return iotDeviceMapper.selectByPrimaryKey(deviceid);
 	}
 	@Override
-	public int insertManufactureInfo(String value1, String value2) {
-		// TODO Auto-generated method stub
-		return iotDeviceMapper.insertManufactureInfo(value1, value2);
-	}
-	@Override
 	public int insertBwInfo(long deviceId,String ipAddr,long uplinkBw,long downlinkBw) {
 		return iotDeviceMapper.insertBwInfo(deviceId, ipAddr, uplinkBw, downlinkBw)
 				;
@@ -62,8 +57,11 @@ public class NRServiceImpl implements NRService {
 	}
 	@Override
 	public boolean isOnline(Long deviceId) {
-		// TODO Auto-generated method stub
 		return iotDeviceMapper.isOnline(deviceId);
+	}
+	@Override
+	public void offLine(long deviceId) {
+		iotDeviceMapper.offLine(deviceId);
 	}
 
 }

@@ -6,9 +6,6 @@ import com.phicomm.netrouter.model.IotDevice;
 
 public interface NRService {
 	IotDevice getDeviceByPrimaryKey(long deviceid);
-	
-	int insertManufactureInfo(String value1,String value2);
-	
 	int insertManufactureInfo(IotDevice iotDevice);
 	
 	int insertBwInfo(long deviceId,String ipAddr,long uplinkBw,long downlinkBw);
@@ -22,5 +19,7 @@ public interface NRService {
 	int updateDevice(IotDevice iotDevice);
 	
 	boolean isOnline(Long deviceid);
+
+	void offLine(long deviceId);
 
 }

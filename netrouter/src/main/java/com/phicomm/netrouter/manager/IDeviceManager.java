@@ -19,7 +19,6 @@ public interface IDeviceManager {
 	public String deviceWarning(Map<String, Object> map);
 	public String updateTranRes(Map<String, Object> map);
 	public String onlineKeep(Map<String, Object> map);
-	public void test();
 	
 	
 }

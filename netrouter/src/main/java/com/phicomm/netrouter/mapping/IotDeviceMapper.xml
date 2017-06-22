@@ -60,6 +60,9 @@
 		manufactureSN=#{1}
 	</select>
 	
+	<select id="offLine" parameterType="java.lang.Long">
+		update iot_device set  online=0 where deviceId = #{0}
+	</select>
 	<select id="isOnline" resultType="boolean"
 		parameterType="java.lang.Long">
 		select online from iot_device where deviceId = #{0}

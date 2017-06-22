@@ -7,8 +7,6 @@ public interface IotDeviceMapper {
 
     int insert(IotDevice record);
     
-    int insertManufactureInfo(String value1,String value2);
-    
     int insertBwInfo(long deviceId,String ipAddr,long uplinkBw,long downlinkBw);
     
     int insertSelective(IotDevice record);
@@ -29,4 +27,6 @@ public interface IotDeviceMapper {
     int getDeviceIdByManufactureInfo(String manufacure, String manufacureSN);
     
     boolean isOnline(Long deviceid);
+
+	void offLine(long deviceId);
 }

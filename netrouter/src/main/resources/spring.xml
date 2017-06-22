@@ -15,5 +15,4 @@
     <context:component-scan base-package="com.phicomm.netrouter.service" />  
     <context:component-scan base-package="com.phicomm.netrouter.server" />  
  	<context:annotation-config />
- 	<bean id="spring" class="com.phicomm.netrouter.util.SpringUtil" />  
 </beans>  

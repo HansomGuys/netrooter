@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.phicomm.netrouter.dao.DeviceWarningMapper" >
 	 <insert id="insertDeviceWarning" parameterType="com.phicomm.netrouter.model.DeviceWarning" >
-    insert into device_warning (deviceId, warningId)
+    insert into dev_warning (deviceId, warningId)
     values (#{deviceId,jdbcType=BIGINT}, #{warningId,jdbcType=BIGINT})
   </insert>
 </mapper>

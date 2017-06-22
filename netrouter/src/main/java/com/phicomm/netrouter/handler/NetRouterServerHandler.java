@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSON;
 import com.phicomm.netrouter.manager.IDeviceManager;
 import com.phicomm.netrouter.manager.ManagerType;
-import com.phicomm.netrouter.manager.impl.DeviceManager;
 
 @Component
 public class NetRouterServerHandler extends IoHandlerAdapter implements IoHandler {
@@ -34,7 +33,6 @@ public class NetRouterServerHandler extends IoHandlerAdapter implements IoHandle
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
 		String str = message.toString();
-//		deviceManager = new DeviceManager();//暂时的
 		@SuppressWarnings("unchecked") 
 		Map<String, Object> map = (Map<String, Object>) JSON.parseObject(str);
 		int type = Integer.parseInt(map.get("type").toString());
@@ -57,14 +55,15 @@ public class NetRouterServerHandler extends IoHandlerAdapter implements IoHandle
 			String result = deviceManager.onlineKeep(map);
 			session.write(result);
 		}
-		if (str.trim().equalsIgnoreCase("quit")) {
+		/*if (str.trim().equalsIgnoreCase("quit")) {
 			session.close();
 			return;
-		}
+		}*/
 
 		// Date date = new Date();
 		System.out.println("Message written..." + message);
 	}
+	
 
 	@Override
 	public void messageSent(IoSession arg0, Object arg1) throws Exception {

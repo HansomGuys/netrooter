@@ -17,6 +17,10 @@ import com.phicomm.netrouter.service.NRService;
 
 @Component
 public class DeviceManager implements IDeviceManager {
+	/*@Autowired
+	private OnlineDevice onlineDevice;
+	@Autowired
+	private OnlineDevicePool onlineDevicePool;*/
 	
 	@Autowired  
     private NRService netRouterService; 
@@ -69,12 +73,19 @@ public class DeviceManager implements IDeviceManager {
 		//需要讨论
 		return null;
 	}
-
+	//此接口需要好好讨论一下，只记录最新的时间或使用任务来做的话都有问题
 	@Override
 	public String onlineKeep(Map<String, Object> map) {
+		Date latestTime = new Date();
 		int type = Integer.parseInt(map.get("type").toString());
 		long deviceId = Long.parseLong(map.get("deviceId").toString());
-		boolean a = netRouterService.isOnline(deviceId);
+		
+		IotDevice iotDevice = new IotDevice();
+		iotDevice.setOnline(true);
+		iotDevice.setDeviceid((long)deviceId);
+		iotDevice.setLatestonlinetime(latestTime);
+//		boolean a = netRouterService.isOnline(deviceId);
+		netRouterService.updateDevice(iotDevice);
 		return generateAck(type);
 	}
 	
@@ -86,22 +97,26 @@ public class DeviceManager implements IDeviceManager {
 		int type = Integer.parseInt(map.get("type").toString());
 		IotDevice iotDevice = new IotDevice();
 		int deviceId = isExisting(manufacture, manufactureSN);
+		Date latestTime = new Date();
 		if(deviceId>=0){
 			//更新
 			iotDevice.setDeviceid((long)deviceId);
 			iotDevice.setOnline(true);
-			iotDevice.setLatestonlinetime(new Date());
+			iotDevice.setLatestonlinetime(latestTime);
 			netRouterService.updateDevice(iotDevice);
 		}else{
 			//插入
 			iotDevice.setManufacture(manufacture);
 			iotDevice.setManufacturesn(manufactureSN);
 			iotDevice.setOnline(true);
-			iotDevice.setFirstonlinetime(new Date());
-			iotDevice.setLatestonlinetime(new Date());
+			iotDevice.setFirstonlinetime(latestTime);
+			iotDevice.setLatestonlinetime(latestTime);
 			netRouterService.insertManufactureInfo(iotDevice);
 			deviceId = netRouterService.getDeviceId(manufacture,manufactureSN);
 		} 
+		/*onlineDevice.setDeviceId(deviceId);
+		onlineDevice.setLatestonlinetime(latestTime);
+		onlineDevice.timer(15000);*/
 		return generateAck(type,deviceId);
 	}
 	
@@ -126,7 +141,7 @@ public class DeviceManager implements IDeviceManager {
 		String value = generateAck(type);
 //		JSONArray ja = JSONArray.parseArray(value);
 		StringBuilder sb = new StringBuilder(value.subSequence(0, value.length()-1));
-		sb.append(",\"deviceId\":"+deviceId+"}");
+		sb.append(",\"deviceId\":"+deviceId+",\"URL\":\"http://172.17.72.249:3001/zb\"}");
 		return sb.toString();
 	}
 	
@@ -151,14 +166,5 @@ public class DeviceManager implements IDeviceManager {
 		}
 
 	}
-
-	@Override
-	public void test() {
-		// TODO Auto-generated method stub
-		System.out.println("device manager injection");
-		
-	}
-
-	
 
 }
