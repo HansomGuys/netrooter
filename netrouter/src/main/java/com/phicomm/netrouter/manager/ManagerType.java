@@ -7,14 +7,4 @@ public enum ManagerType {
 	DEVICE_WARNING, 
 	UPDATE_TRANRES, 
 	ONLINE_KEEP;
-
-	/*private int _type;
-	ManagerType(int type) {
-		this._type = type;
-	}
-	
-	@Override
-	public String toString() {
-		return ""+_type;
-	}*/
 }
