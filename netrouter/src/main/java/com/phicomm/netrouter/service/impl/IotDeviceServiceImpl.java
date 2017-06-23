@@ -7,7 +7,7 @@ import com.phicomm.netrouter.dao.IotDeviceMapper;
 import com.phicomm.netrouter.model.IotDevice;
 import com.phicomm.netrouter.service.IotDeviceService;
 
-@Service("iotDeviceService")
+@Service("nrDeviceService")
 public class IotDeviceServiceImpl implements IotDeviceService {
 
 	@Autowired

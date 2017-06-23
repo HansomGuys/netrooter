@@ -1,7 +1,5 @@
 package com.phicomm.netrouter.dao;
 
-import java.util.List;
-
 import com.phicomm.netrouter.model.LiveInfo;
 
 public interface LiveInfoMapper {
@@ -16,10 +14,4 @@ public interface LiveInfoMapper {
     int updateByPrimaryKeySelective(LiveInfo record);
 
     int updateByPrimaryKey(LiveInfo record);
-    
-    List<LiveInfo> getResourceId(LiveInfo liveInfo);
-    
-    void insertSelective();
-    
-    int getMaxResId();
 }

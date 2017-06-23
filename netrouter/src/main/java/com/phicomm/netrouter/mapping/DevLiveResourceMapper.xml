@@ -8,13 +8,9 @@
     <result column="bitrate" property="bitrate" jdbcType="INTEGER" />
     <result column="maxSlaveCnt" property="maxslavecnt" jdbcType="INTEGER" />
     <result column="currentSlaveCnt" property="currentslavecnt" jdbcType="INTEGER" />
-    <result column="online" property="online" jdbcType="BIT" />
-    <result column="firstTime" property="firsttime" jdbcType="TIMESTAMP" />
-    <result column="lastTime" property="lasttime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    resourceId, deviceId, url, bitrate, maxSlaveCnt, currentSlaveCnt, online, firstTime, 
-    lastTime
+    resourceId, deviceId, url, bitrate, maxSlaveCnt, currentSlaveCnt
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.phicomm.netrouter.model.DevLiveResourceKey" >
     select 
@@ -23,11 +19,6 @@
     where resourceId = #{resourceid,jdbcType=BIGINT}
       and deviceId = #{deviceid,jdbcType=BIGINT}
   </select>
-  <select id="selectLiveResByPrimaryKey" resultType="com.phicomm.netrouter.model.DevLiveResource" parameterType="java.lang.Long" >
-    select *
-    from dev_live_resource
-    where resourceId = #{resourceid,jdbcType=BIGINT} and online = 1
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.phicomm.netrouter.model.DevLiveResourceKey" >
     delete from dev_live_resource
     where resourceId = #{resourceid,jdbcType=BIGINT}
@@ -35,12 +26,10 @@
   </delete>
   <insert id="insert" parameterType="com.phicomm.netrouter.model.DevLiveResource" >
     insert into dev_live_resource (resourceId, deviceId, url, 
-      bitrate, maxSlaveCnt, currentSlaveCnt, 
-      online, firstTime, lastTime
+      bitrate, maxSlaveCnt, currentSlaveCnt
       )
     values (#{resourceid,jdbcType=BIGINT}, #{deviceid,jdbcType=BIGINT}, #{url,jdbcType=VARCHAR}, 
-      #{bitrate,jdbcType=INTEGER}, #{maxslavecnt,jdbcType=INTEGER}, #{currentslavecnt,jdbcType=INTEGER}, 
-      #{online,jdbcType=BIT}, #{firsttime,jdbcType=TIMESTAMP}, #{lasttime,jdbcType=TIMESTAMP}
+      #{bitrate,jdbcType=INTEGER}, #{maxslavecnt,jdbcType=INTEGER}, #{currentslavecnt,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.phicomm.netrouter.model.DevLiveResource" >
@@ -64,15 +53,6 @@
       <if test="currentslavecnt != null" >
         currentSlaveCnt,
       </if>
-      <if test="online != null" >
-        online,
-      </if>
-      <if test="firsttime != null" >
-        firstTime,
-      </if>
-      <if test="lasttime != null" >
-        lastTime,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="resourceid != null" >
@@ -93,15 +73,6 @@
       <if test="currentslavecnt != null" >
         #{currentslavecnt,jdbcType=INTEGER},
       </if>
-      <if test="online != null" >
-        #{online,jdbcType=BIT},
-      </if>
-      <if test="firsttime != null" >
-        #{firsttime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lasttime != null" >
-        #{lasttime,jdbcType=TIMESTAMP},
-      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.phicomm.netrouter.model.DevLiveResource" >
@@ -119,15 +90,6 @@
       <if test="currentslavecnt != null" >
         currentSlaveCnt = #{currentslavecnt,jdbcType=INTEGER},
       </if>
-      <if test="online != null" >
-        online = #{online,jdbcType=BIT},
-      </if>
-      <if test="firsttime != null" >
-        firstTime = #{firsttime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lasttime != null" >
-        lastTime = #{lasttime,jdbcType=TIMESTAMP},
-      </if>
     </set>
     where resourceId = #{resourceid,jdbcType=BIGINT}
       and deviceId = #{deviceid,jdbcType=BIGINT}
@@ -137,10 +99,7 @@
     set url = #{url,jdbcType=VARCHAR},
       bitrate = #{bitrate,jdbcType=INTEGER},
       maxSlaveCnt = #{maxslavecnt,jdbcType=INTEGER},
-      currentSlaveCnt = #{currentslavecnt,jdbcType=INTEGER},
-      online = #{online,jdbcType=BIT},
-      firstTime = #{firsttime,jdbcType=TIMESTAMP},
-      lastTime = #{lasttime,jdbcType=TIMESTAMP}
+      currentSlaveCnt = #{currentslavecnt,jdbcType=INTEGER}
     where resourceId = #{resourceid,jdbcType=BIGINT}
       and deviceId = #{deviceid,jdbcType=BIGINT}
   </update>
