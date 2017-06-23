@@ -20,9 +20,9 @@ USE `netrouter`;
 
 CREATE TABLE `live_info` (
   `resourceId` bigint(20) NOT NULL AUTO_INCREMENT,
-  `provider` varchar(20) DEFAULT NULL,
-  `path` varchar(20) DEFAULT NULL,
-  `host` varchar(10) DEFAULT NULL,
+  `provider` varchar(50) DEFAULT NULL,
+  `path` varchar(50) DEFAULT NULL,
+  `host` varchar(50) DEFAULT NULL,
   `time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`resourceId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -46,9 +46,6 @@ CREATE TABLE `iot_device` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `iot_device` */
-
-insert  into `iot_device`(`deviceId`,`manufacture`,`manufactureSN`,`online`,`firstOnlineTime`,`latestOnlineTime`,`ipAddr`,`uplinkBw`,`downlinkBw`,`beMaster`) values (1,'fx','123',1,'2017-06-07 18:45:53',NULL,NULL,NULL,NULL,0);
-
 /*Table structure for table `topo_group` */
 
 CREATE TABLE `topo_group` (
@@ -66,9 +63,12 @@ CREATE TABLE `dev_live_resource` (
   `resourceId` bigint(20) NOT NULL,
   `deviceId` bigint(20) NOT NULL,
   `url` varchar(300) DEFAULT NULL,
-  `bitrate` int(11) DEFAULT NULL,
-  `maxSlaveCnt` int(11) DEFAULT NULL,
-  `currentSlaveCnt` int(11) DEFAULT NULL,
+  `bitrate` int(11) DEFAULT 0,
+  `maxSlaveCnt` int(11) DEFAULT 0,
+  `currentSlaveCnt` int(11) DEFAULT 0,
+  `online` tinyint(1) DEFAULT '1',   /*设备资源上报，添加记录，资源默认在线，置为1*/
+  `firstTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `lastTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`resourceId`,`deviceId`),
   KEY `deviceId` (`deviceId`),
   CONSTRAINT `dev_live_resource_ibfk_1` FOREIGN KEY (`resourceId`) REFERENCES `live_info` (`resourceId`),
@@ -96,8 +96,13 @@ CREATE TABLE `dev_ntw_topo` (
 
 CREATE TABLE `transfer_resource` (
   `deviceId` bigint(20) NOT NULL,
-  `dst` bigint(20) NOT NULL,
-  `resourceId` bigint(20) NOT NULL
+  `src` varchar(60) NOT NULL,        /*src可能为origin*/
+  `resourceId` bigint(20) NOT NULL,
+  `online` tinyint(1) DEFAULT '1',   /*资源转发上报，添加记录，转发信息默认在线，置为1*/
+  `totalBytes` varchar(512) DEFAULT NULL,
+  PRIMARY KEY (`deviceId`,`src`,`resourceId`),
+  CONSTRAINT `transfer_resource_ibfk_1` FOREIGN KEY (`deviceId`) REFERENCES `iot_device` (`deviceId`),
+  CONSTRAINT `transfer_resource_ibfk_2` FOREIGN KEY (`resourceId`) REFERENCES `live_info` (`resourceId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `transfer_resource` */
