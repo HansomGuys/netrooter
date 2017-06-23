@@ -17,6 +17,18 @@
     from live_info
     where resourceId = #{resourceid,jdbcType=BIGINT}
   </select>
+  <!-- String getResourceId(LiveInfo liveInfo) -->
+  <select id="getResourceId" parameterType="com.phicomm.netrouter.model.LiveInfo" resultType="com.phicomm.netrouter.model.LiveInfo">
+    select *
+    from live_info
+    where path = #{path,jdbcType=VARCHAR} 
+    and host = #{host,jdbcType=VARCHAR}
+  </select>
+  <!-- int getMaxResId(); -->
+  <select id="getMaxResId" resultType="java.lang.Integer">
+    select max(resourceId)
+    from live_info
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from live_info
     where resourceId = #{resourceid,jdbcType=BIGINT}
@@ -26,6 +38,11 @@
       host, time)
     values (#{resourceid,jdbcType=BIGINT}, #{provider,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
       #{host,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <!-- void insertNewItem() -->
+  <insert id="insertNewItem">
+    insert into live_info (provider, path, host)
+    values ('', '', '')
   </insert>
   <insert id="insertSelective" parameterType="com.phicomm.netrouter.model.LiveInfo" >
     insert into live_info
