@@ -8,11 +8,28 @@
   
     <!--引入配置属性文件 -->  
     <context:property-placeholder location="classpath:config.properties" />  
-    <context:component-scan base-package="com.phicomm.netrouter.manager.impl" />  
+	<context:component-scan base-package="com.phicomm.netrouter.manager.impl" />  
     <context:component-scan base-package="com.phicomm.netrouter.handler" />  
-  
+	
     <!--自动扫描含有@Service将其注入为bean -->  
     <context:component-scan base-package="com.phicomm.netrouter.service" />  
-    <context:component-scan base-package="com.phicomm.netrouter.server" />  
+	<context:component-scan base-package="com.phicomm.netrouter.server" /> 
  	<context:annotation-config />
+ 	
+ 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonHttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    
 </beans>  
