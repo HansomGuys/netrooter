@@ -1,5 +1,7 @@
 package com.phicomm.netrouter.dao;
 
+import java.util.List;
+
 import com.phicomm.netrouter.model.DevLiveResource;
 import com.phicomm.netrouter.model.DevLiveResourceKey;
 
@@ -15,4 +17,6 @@ public interface DevLiveResourceMapper {
     int updateByPrimaryKeySelective(DevLiveResource record);
 
     int updateByPrimaryKey(DevLiveResource record);
+    
+    List<DevLiveResource> selectLiveResByPrimaryKey(long resourceId);
 }
