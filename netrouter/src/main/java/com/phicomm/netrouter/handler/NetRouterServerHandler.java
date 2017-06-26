@@ -2,6 +2,7 @@ package com.phicomm.netrouter.handler;
 
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.service.IoHandler;
 import org.apache.mina.core.service.IoHandlerAdapter;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSON;
 import com.phicomm.netrouter.manager.IDeviceManager;
 import com.phicomm.netrouter.manager.ManagerType;
+import com.phicomm.netrouter.server.NetRouterServer;
 
 /**
  * @author chenglin02.wang
@@ -23,6 +25,8 @@ public class NetRouterServerHandler extends IoHandlerAdapter implements IoHandle
 
 	@Autowired
 	private IDeviceManager deviceManager;
+	
+	Logger log = Logger.getLogger(NetRouterServerHandler.class);
 
 	@Override
 	public void exceptionCaught(IoSession arg0, Throwable cause) throws Exception {
@@ -38,34 +42,40 @@ public class NetRouterServerHandler extends IoHandlerAdapter implements IoHandle
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
 		String str = ioBuffer2String(message);
-		System.out.println("Message written..." + str);
+		log.info("Message Received: " + str);
 
 		Map<String, Object> map = (Map<String, Object>) JSON.parseObject(str);
+		String temp = null;
 		int type = Integer.parseInt(map.get("type").toString());
 		if (type == (ManagerType.ONLINE_NOTIFY.ordinal() + 1)) {
-			String temp = deviceManager.onlineNotify(map);
+			temp = deviceManager.onlineNotify(map);
 			IoBuffer result = string2IOBuffer(temp);
 			session.write(result);
 		} else if (type == (ManagerType.BWINFO_REPORT.ordinal() + 1)) {
-			String temp = deviceManager.bWInfoReport(map);
+			temp = deviceManager.bWInfoReport(map);
 			IoBuffer result = string2IOBuffer(temp);
 			session.write(result);
 		} else if (type == (ManagerType.TOPOINFO_REPORT.ordinal() + 1)) {
-			String temp = deviceManager.topoInfoReport(map);
+			temp = deviceManager.topoInfoReport(map);
 			IoBuffer result = string2IOBuffer(temp);
 			session.write(result);
 		} else if (type == (ManagerType.DEVICE_WARNING.ordinal() + 1)) {
 			// TODO: modify sql script
-			String temp = deviceManager.deviceWarning(map);
+			temp = deviceManager.deviceWarning(map);
 			IoBuffer result = string2IOBuffer(temp);
 			session.write(result);
 		} else if (type == (ManagerType.UPDATE_TRANRES.ordinal() + 1)) {
 			deviceManager.updateTranRes(map);
 		} else if (type == (ManagerType.ONLINE_KEEP.ordinal() + 1)) {
-			String temp = deviceManager.onlineKeep(map);
+			temp = deviceManager.onlineKeep(map);
 			IoBuffer result = string2IOBuffer(temp);
 			session.write(result);
 		}
+		
+		if(temp != null){
+			log.info("Message Send: "+temp);
+		}
+		
 	}
 
 	private IoBuffer string2IOBuffer(String result) {
