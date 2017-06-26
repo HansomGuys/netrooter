@@ -26,9 +26,6 @@ public class NetRouterServer implements InitializingBean, ServletContextAware {
 	@Autowired
 	private NetRouterServerHandler handler;
 	
-	@Autowired
-	private LiveInfoMapper liveInfoMapper;
-	
 	Logger log = Logger.getLogger(NetRouterServer.class);
 
 	/**
@@ -38,7 +35,6 @@ public class NetRouterServer implements InitializingBean, ServletContextAware {
 		// 这里需要加个判断，如果启动了，则不需要再启动的，有挑站
 		//每次代码修改后都要重启springframe， 否则会报错，这样的以后升级的时候会重启整个服务器
 		log.info("Tcp server started");
-		log.info("LiveInfoMapper-getMaxResId():" + liveInfoMapper.getMaxResId());
 		IoAcceptor acceptor = new NioSocketAcceptor();
 		acceptor.getFilterChain().addLast("logger", new LoggingFilter());
 //		acceptor.getFilterChain().addLast("codec",new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("UTF-8"))));
@@ -47,9 +43,9 @@ public class NetRouterServer implements InitializingBean, ServletContextAware {
 //		acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 10);
 		InetSocketAddress inetSocketAddress = null;
 		try {
-//			inetSocketAddress = new InetSocketAddress("172.17.225.249", PORT);
+			inetSocketAddress = new InetSocketAddress("172.17.225.249", PORT);
 //			inetSocketAddress = new InetSocketAddress("10.10.10.237", PORT);
-			inetSocketAddress = new InetSocketAddress(PORT);
+//			inetSocketAddress = new InetSocketAddress(PORT);
 //			inetSocketAddress = new InetSocketAddress("172.17.255.80", PORT);
 			acceptor.bind(inetSocketAddress);
 		} catch (IOException e) {

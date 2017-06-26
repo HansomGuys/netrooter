@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSON;
 import com.phicomm.netrouter.manager.IDeviceManager;
 import com.phicomm.netrouter.model.DevNtwTopo;
+import com.phicomm.netrouter.model.DevNtwTopoKey;
 import com.phicomm.netrouter.model.DeviceWarning;
 import com.phicomm.netrouter.model.IotDevice;
 import com.phicomm.netrouter.service.NRService;
@@ -42,14 +43,22 @@ public class DeviceManager implements IDeviceManager {
 	public String topoInfoReport(Map<String, Object> map) {
 		//ToDo:根据ip地址给出topoid，即要决定此设备属于哪一个拓扑
 		long deviceId = Long.parseLong(map.get("deviceId").toString());
-		long topoGroupId = 0;
+		long topoGroupId = 1;//当前写死
 		String publicIpAddr = map.get("publicIpAddr").toString();
 		int type = Integer.parseInt(map.get("type").toString());
-		DevNtwTopo devNtwTopo = new DevNtwTopo();
-		devNtwTopo.setDeviceid(deviceId);
-		devNtwTopo.setPublicipaddr(publicIpAddr);
-		devNtwTopo.setTopogroupid(topoGroupId);
-		netRouterService.insertDevNtwTopo(devNtwTopo);
+		
+		DevNtwTopoKey topoKey = new DevNtwTopoKey();
+		topoKey.setDeviceid(deviceId);
+		topoKey.setTopogroupid(topoGroupId);
+		
+		DevNtwTopo devNtwTopo = netRouterService.getDevNtwTopoByPrimaryKey(topoKey);
+		if(null == devNtwTopo){
+			devNtwTopo = new DevNtwTopo();
+			devNtwTopo.setDeviceid(deviceId);
+			devNtwTopo.setPublicipaddr(publicIpAddr);
+			devNtwTopo.setTopogroupid(topoGroupId);
+			netRouterService.insertDevNtwTopo(devNtwTopo);
+		}
 		return generateAck(type);
 	}
 
@@ -138,7 +147,7 @@ public class DeviceManager implements IDeviceManager {
 	private String generateAck(int type,int deviceId){
 		String value = generateAck(type);
 		StringBuilder sb = new StringBuilder(value.subSequence(0, value.length()-1));
-		sb.append(",\"deviceId\":"+deviceId+",\"zburl\":\"http://172.17.72.249:3001/zb\"}");
+		sb.append(",\"deviceId\":"+deviceId+",\"zburl\":\"http://172.17.225.249:8090/zb/\"}");
 		return sb.toString();
 	}
 	

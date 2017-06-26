@@ -1,11 +1,13 @@
 package com.phicomm.netrouter.service;
 
 import com.phicomm.netrouter.model.DevNtwTopo;
+import com.phicomm.netrouter.model.DevNtwTopoKey;
 import com.phicomm.netrouter.model.DeviceWarning;
 import com.phicomm.netrouter.model.IotDevice;
 
 public interface NRService {
 	IotDevice getDeviceByPrimaryKey(long deviceid);
+	DevNtwTopo getDevNtwTopoByPrimaryKey(DevNtwTopoKey key);
 	int insertManufactureInfo(IotDevice iotDevice);
 	
 	int insertBwInfo(long deviceId,String ipAddr,long uplinkBw,long downlinkBw);

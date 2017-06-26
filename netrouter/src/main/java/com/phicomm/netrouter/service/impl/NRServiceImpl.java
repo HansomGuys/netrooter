@@ -7,6 +7,7 @@ import com.phicomm.netrouter.dao.DevNtwTopoMapper;
 import com.phicomm.netrouter.dao.DeviceWarningMapper;
 import com.phicomm.netrouter.dao.IotDeviceMapper;
 import com.phicomm.netrouter.model.DevNtwTopo;
+import com.phicomm.netrouter.model.DevNtwTopoKey;
 import com.phicomm.netrouter.model.DeviceWarning;
 import com.phicomm.netrouter.model.IotDevice;
 import com.phicomm.netrouter.service.NRService;
@@ -62,6 +63,11 @@ public class NRServiceImpl implements NRService {
 	@Override
 	public void offLine(long deviceId) {
 		iotDeviceMapper.offLine(deviceId);
+	}
+	@Override
+	public DevNtwTopo getDevNtwTopoByPrimaryKey(DevNtwTopoKey key) {
+		// TODO Auto-generated method stub
+		return devNtwTopoMapper.selectByPrimaryKey(key);
 	}
 
 }
