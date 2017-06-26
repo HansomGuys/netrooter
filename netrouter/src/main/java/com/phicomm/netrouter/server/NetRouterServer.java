@@ -36,7 +36,7 @@ public class NetRouterServer implements InitializingBean, ServletContextAware {
 //		acceptor.getFilterChain().addLast("codec",new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("UTF-8"))));
 		acceptor.setHandler(handler);
 		acceptor.getSessionConfig().setReadBufferSize(2048);
-		acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 10);
+//		acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 10);
 		InetSocketAddress inetSocketAddress = null;
 		try {
 //			inetSocketAddress = new InetSocketAddress("172.17.225.249", PORT);
