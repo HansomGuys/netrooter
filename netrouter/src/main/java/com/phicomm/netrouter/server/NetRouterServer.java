@@ -15,13 +15,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.ServletContextAware;
 
+import com.phicomm.netrouter.dao.IotDeviceMapper;
+import com.phicomm.netrouter.dao.LiveInfoMapper;
 import com.phicomm.netrouter.handler.NetRouterServerHandler;
+import com.phicomm.netrouter.manager.IDeviceManager;
 
 @Component
 public class NetRouterServer implements InitializingBean, ServletContextAware {
 	private static final int PORT = 9123;
 	@Autowired
 	private NetRouterServerHandler handler;
+	
+	@Autowired
+	private LiveInfoMapper liveInfoMapper;
+	
 	Logger log = Logger.getLogger(NetRouterServer.class);
 
 	/**
@@ -31,6 +38,7 @@ public class NetRouterServer implements InitializingBean, ServletContextAware {
 		// 这里需要加个判断，如果启动了，则不需要再启动的，有挑站
 		//每次代码修改后都要重启springframe， 否则会报错，这样的以后升级的时候会重启整个服务器
 		log.info("Tcp server started");
+		log.info("LiveInfoMapper-getMaxResId():" + liveInfoMapper.getMaxResId());
 		IoAcceptor acceptor = new NioSocketAcceptor();
 		acceptor.getFilterChain().addLast("logger", new LoggingFilter());
 //		acceptor.getFilterChain().addLast("codec",new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("UTF-8"))));

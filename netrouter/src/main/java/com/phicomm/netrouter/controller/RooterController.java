@@ -70,10 +70,7 @@ public class RooterController {
     	System.out.println(list.getType());
     	return "success";
     }
-	
-    
 
-	//public com.alibaba.fastjson.JSONObject request(HttpServletRequest request) 
     //请求总接口，根据type来做相应的处理
     @RequestMapping(value = "/index", method=RequestMethod.POST, produces="application/json")
 	//@RequestMapping(value = {"/index","","/"}, method=RequestMethod.POST, produces="application/json")
@@ -88,9 +85,9 @@ public class RooterController {
     		//设备获取直播资源列表  type=0
     		if(type == 0)
     		{
-    			int deviceId = Integer.parseInt(list.getDeviceId().trim());//Integer.parseInt(request.getParameter("deviceId").replace('"', ' ').trim());
-    			String path=list.getPath();//request.getParameter("path").replace('"', ' ').trim();
-    			String host=list.getHost();//request.getParameter("host").replace('"', ' ').trim();
+    			int deviceId = Integer.parseInt(list.getDeviceId().trim());
+    			String path=list.getPath();
+    			String host=list.getHost();
     			
     			/*
     			response.setContentType("application/json;charset=utf-8"); 
@@ -105,28 +102,28 @@ public class RooterController {
     		//设备直播服务接口上报 tyrpe=1
     		else if(type == 1)
     		{
-    			int deviceId = Integer.parseInt(list.getDeviceId().trim());//Integer.parseInt(request.getParameter("deviceId").replace('"', ' ').trim());
-    			int resourceId = list.getResId();//Integer.parseInt(request.getParameter("resId"));
-    			int cap = list.getCap();//Integer.parseInt(request.getParameter("cap"));
-    			String url = list.getUrl();//request.getParameter("url").replace('"', ' ').trim();
+    			int deviceId = Integer.parseInt(list.getDeviceId().trim());
+    			int resourceId = list.getResId();
+    			int cap = list.getCap();
+    			String url = list.getUrl();
     			
     			resourceOnLineReport(type, deviceId, resourceId, url, cap, response);
     		}
     		//设备直播服务（下线）接口上报  type=2
     		else if(type ==2)
     		{
-    			long deviceId = Integer.parseInt(list.getDeviceId().trim());//Integer.parseInt(request.getParameter("deviceId").replace('"', ' ').trim());
-    			long resourceId = list.getResId();//Integer.parseInt(request.getParameter("resId"));
-    			String url = list.getUrl();//request.getParameter("url").replace('"', ' ').trim();
+    			long deviceId = Integer.parseInt(list.getDeviceId().trim());
+    			long resourceId = list.getResId();
+    			String url = list.getUrl();
     			
-    			resourceOffLineReport(type, deviceId, resourceId, response);//, url);
+    			resourceOffLineReport(type, deviceId, resourceId, response);
     		}
     		//直播转发流建立上报  type=3
     		else if(type == 3)
     		{
-    			long deviceId = Integer.parseInt(list.getDeviceId().trim());//Integer.parseInt(request.getParameter("deviceId").replace('"', ' ').trim());
-    			long resourceId = list.getResId();//Integer.parseInt(request.getParameter("resId"));
-    			String src = list.getSrc().trim();//request.getParameter("src").replace('"', ' ').trim();
+    			long deviceId = Integer.parseInt(list.getDeviceId().trim());
+    			long resourceId = list.getResId();
+    			String src = list.getSrc().trim();
     			
     			if(src.trim().equals("origin"))
     			{
@@ -219,7 +216,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
 				
 				return;
-				//return json;
+				
 			}
 			else
 			{
@@ -254,7 +251,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
 				
 				//返回查询到的直播资源
-				//return json;
+				
 				return;
 			}
 		} catch (Exception e) {
@@ -301,7 +298,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
     			
 				return;
-				//return json;
+				
 			}
 			
 			DevLiveResourceKey key = new DevLiveResourceKey();
@@ -355,7 +352,7 @@ public class RooterController {
 			logger.info("**************************************************************************\n");
 			
 			return;
-			//return json;
+			
 			
 		} catch (Exception e) {
 			logger.error(e.getStackTrace());
@@ -371,7 +368,7 @@ public class RooterController {
 			logger.info("**************************************************************************\n");
 			
 			return;
-			//return json;
+			
 		}
 	}
     
@@ -413,7 +410,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
     			
 				return;
-				//return json;
+				
 			}
 			
 			/*否则将资源的online置为false，当前转发链接数置为0*/
@@ -446,7 +443,7 @@ public class RooterController {
 			logger.info("**************************************************************************\n"); 
 			
 			return;
-			//return json;
+			
 			
 		} catch (Exception e) {
 			logger.error(e.getStackTrace());
@@ -462,7 +459,7 @@ public class RooterController {
 			logger.info("**************************************************************************\n");
 			
 			return;
-			//return json;
+			
 		}
 	}
     
@@ -509,7 +506,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
     			
 				return;
-				//return json;
+				
 			}
 			
 			/*如果设备上没有要转发的资源或要转发的资源下线，就没法进行转发，返回异常2*/
@@ -530,7 +527,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");				
     			
 				return;
-				//return json;
+				
 			}
 			
 			int maxLaveCnt = res.getMaxslavecnt();
@@ -554,7 +551,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
     			
 				return;
-    			//return json;
+    			
 			}
 			
 			Transfer_resource transRes = transfer_resourceService.selectByPrimaryKey(transfer_resource);
@@ -577,7 +574,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
     			
 				return;
-    			//return json;
+    			
 			}
 			else if((transRes != null) && (transRes.getOnline() == false))
 			{
@@ -586,6 +583,8 @@ public class RooterController {
 				res.setCurrentslavecnt(currentSlaveCnt);
 				devLiveResourceService.updateByPrimaryKeySelective(res);
 				transfer_resource.setOnline(true);
+				/*设置转发记录上线时间*/
+				transfer_resource.setStarttime(new Date());
 				transfer_resourceService.updateByPrimaryKeySelective(transfer_resource);
 				
 				JSONObject json = new JSONObject();
@@ -603,7 +602,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
 				
 				return;
-				//return json;
+				
 			}
 			else
 			{
@@ -612,6 +611,8 @@ public class RooterController {
 				res.setCurrentslavecnt(currentSlaveCnt);
 				devLiveResourceService.updateByPrimaryKeySelective(res);
 				transfer_resource.setOnline(true);
+				/*设置转发记录上线时间*/
+				transfer_resource.setStarttime(new Date());
 				transfer_resourceService.insertSelective(transfer_resource);
 				
 				JSONObject json = new JSONObject();
@@ -629,7 +630,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
 				
 				return;
-				//return json;
+				
 			}
 			
 		} catch (Exception e) {
@@ -646,7 +647,7 @@ public class RooterController {
 			logger.info("**************************************************************************\n");
 			
 			return;
-			//return json;
+			
 		}
 	}
     
@@ -695,7 +696,7 @@ public class RooterController {
 					logger.info("**************************************************************************\n");
 					
 					return;
-					//return json;
+					
 				}
 				
 				/*如果设备上没有要转发的资源或要转发的资源下线，就没法进行转发，返回异常2*/
@@ -751,7 +752,7 @@ public class RooterController {
 					logger.info("**************************************************************************\n");
 					
 					return;
-					//return json;
+					
 				}
 				else if((transRes != null) && (transRes.getOnline() == false))
 				{
@@ -763,6 +764,8 @@ public class RooterController {
 					*/
 					
 					transfer_resource.setOnline(true);
+					/*设置转发记录上线时间*/
+					transfer_resource.setStarttime(new Date());
 					transfer_resourceService.updateByPrimaryKeySelective(transfer_resource);
 					
 					JSONObject json = new JSONObject();
@@ -780,7 +783,7 @@ public class RooterController {
 					logger.info("**************************************************************************\n");
 					
 					return;
-					//return json;
+					
 				}
 				else
 				{
@@ -792,6 +795,8 @@ public class RooterController {
 					*/
 					
 					transfer_resource.setOnline(true);
+					/*设置转发记录上线时间*/
+					transfer_resource.setStarttime(new Date());
 					transfer_resourceService.insertSelective(transfer_resource);
 					
 					JSONObject json = new JSONObject();
@@ -809,7 +814,7 @@ public class RooterController {
 					logger.info("**************************************************************************\n");
 					
 					return;
-					//return json;
+					
 				}
 				
 			} catch (Exception e) {
@@ -826,7 +831,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
 				
 				return;
-				//return json;
+				
 			}
 	}
 	
@@ -842,7 +847,6 @@ public class RooterController {
 			transfer_resource.setDeviceid(deviceId);
 			transfer_resource.setResourceid(resourceId);
 			transfer_resource.setSrc(src+"");
-			transfer_resource.setTotalbytes(totalBytes);
 			
 			DevLiveResourceKey key = new DevLiveResourceKey();
 			//key.setDeviceid(deviceId);
@@ -872,7 +876,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
 				
 				return;
-				//return json;
+				
 			}
 			
 			Transfer_resource transRes = transfer_resourceService.selectByPrimaryKey(transfer_resource);
@@ -895,7 +899,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
 				
 				return;
-				//return json;
+				
 			}
 			/*如果资源转发表transfer_resource中已经有该转发记录且状态已下线，返回异常3*/
 			else if((transRes != null) && (transRes.getOnline() == false))
@@ -915,7 +919,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
 				
 				return;
-				//return json;
+				
 			}
 			/*如果资源转发表transfer_resource中已经有对应的转发记录且状态为在线*/
 			else
@@ -926,6 +930,11 @@ public class RooterController {
 				res.setCurrentslavecnt(currentSlaveCnt);
 				devLiveResourceService.updateByPrimaryKeySelective(res);
 				transfer_resource.setOnline(false);
+				/*设置转发记录下线时间*/
+				transfer_resource.setEndtime(new Date());
+				/* 将上次的totalBytes加上上报的totalBytes作为新的转发字节数 */
+				long newBytes = Integer.parseInt(totalBytes) + Integer.parseInt(transRes.getTotalbytes());
+				transfer_resource.setTotalbytes(newBytes + "");
 				transfer_resourceService.updateByPrimaryKeySelective(transfer_resource);
 				
 				JSONObject json = new JSONObject();
@@ -943,7 +952,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
 				
 				return;
-				//return json;
+				
 			}
 			
 		} catch (Exception e) {
@@ -960,7 +969,7 @@ public class RooterController {
 			logger.info("**************************************************************************\n");
 			
 			return;
-			//return json;
+			
 		}
 	}
 	
@@ -976,7 +985,6 @@ public class RooterController {
 			transfer_resource.setDeviceid(deviceId);
 			transfer_resource.setResourceid(resourceId);
 			transfer_resource.setSrc(src);
-			transfer_resource.setTotalbytes(totalBytes);
 			
 			/*
 			DevLiveResourceKey key = new DevLiveResourceKey();
@@ -1025,7 +1033,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
 				
 				return;
-				//return json;
+				
 			}
 			/*如果资源转发表transfer_resource中已经有该转发记录且状态已下线，返回异常2*/
 			else if((transRes != null) && (transRes.getOnline() == false))
@@ -1045,7 +1053,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
 				
 				return;
-				//return json;
+				
 			}
 			/*如果资源转发表transfer_resource中已经有对应的转发记录且状态为在线*/
 			else
@@ -1059,6 +1067,11 @@ public class RooterController {
 				*/
 				
 				transfer_resource.setOnline(false);
+				/*设置转发记录下线时间*/
+				transfer_resource.setEndtime(new Date());
+				/* 将上次的totalBytes加上上报的totalBytes作为新的转发字节数 */
+				long newBytes = Integer.parseInt(totalBytes) + Integer.parseInt(transRes.getTotalbytes());
+				transfer_resource.setTotalbytes(newBytes + "");
 				transfer_resourceService.updateByPrimaryKeySelective(transfer_resource);
 				
 				JSONObject json = new JSONObject();
@@ -1076,7 +1089,7 @@ public class RooterController {
 				logger.info("**************************************************************************\n");
 				
 				return;
-				//return json;
+				
 			}
 			
 		} catch (Exception e) {
@@ -1093,7 +1106,7 @@ public class RooterController {
 			logger.info("**************************************************************************\n");
 			
 			return;
-			//return json;
+			
 		}
 	}
 }
