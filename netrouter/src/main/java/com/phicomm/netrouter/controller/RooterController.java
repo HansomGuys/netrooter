@@ -190,6 +190,7 @@ public class RooterController {
 				else if(devType.length == 1)
 					provider = devType[0];
 				
+				liveInfo.setHost(host);
 				liveInfo.setProvider(provider);
 				liveInfoService.insertNewItem(liveInfo);
 				
