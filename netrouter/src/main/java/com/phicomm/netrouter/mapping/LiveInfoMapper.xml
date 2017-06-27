@@ -22,7 +22,6 @@
     select *
     from live_info
     where path = #{path,jdbcType=VARCHAR} 
-    and host = #{host,jdbcType=VARCHAR}
   </select>
   <!-- int getMaxResId(); -->
   <select id="getMaxResId" resultType="java.lang.Integer">

@@ -175,7 +175,7 @@ public class RooterController {
 			String path2 = path1[path1.length-1];
 			path = path2.split("\\?")[0];
 			liveInfo.setPath(path);
-			liveInfo.setHost(host);
+			//liveInfo.setHost(host);
 			
 			List<LiveInfo> resList = liveInfoService.getResourceId(liveInfo);
 			if(resList.size() == 0)
@@ -933,7 +933,11 @@ public class RooterController {
 				/*设置转发记录下线时间*/
 				transfer_resource.setEndtime(new Date());
 				/* 将上次的totalBytes加上上报的totalBytes作为新的转发字节数 */
-				long newBytes = Integer.parseInt(totalBytes) + Integer.parseInt(transRes.getTotalbytes());
+				long newBytes = 0;
+				if((totalBytes != null) && (totalBytes != null))
+					newBytes += Long.parseLong(totalBytes);
+				if(transRes.getTotalbytes() != null)
+					newBytes += Long.parseLong(transRes.getTotalbytes());
 				transfer_resource.setTotalbytes(newBytes + "");
 				transfer_resourceService.updateByPrimaryKeySelective(transfer_resource);
 				
@@ -1070,8 +1074,12 @@ public class RooterController {
 				/*设置转发记录下线时间*/
 				transfer_resource.setEndtime(new Date());
 				/* 将上次的totalBytes加上上报的totalBytes作为新的转发字节数 */
-				long newBytes = Integer.parseInt(totalBytes) + Integer.parseInt(transRes.getTotalbytes());
-				transfer_resource.setTotalbytes(newBytes + "");
+				long newBytes = 0;
+				if((totalBytes != null) && (totalBytes != null))
+					newBytes += Long.parseLong(totalBytes);
+				if(transRes.getTotalbytes() != null)
+					newBytes += Long.parseLong(transRes.getTotalbytes());
+				transfer_resource.setTotalbytes(newBytes+"");
 				transfer_resourceService.updateByPrimaryKeySelective(transfer_resource);
 				
 				JSONObject json = new JSONObject();
