@@ -28,7 +28,6 @@ public class NRServiceImpl implements NRService {
 	
 	@Override
 	public IotDevice getDeviceByPrimaryKey(long deviceid) {
-		// TODO Auto-generated method stub
 		return iotDeviceMapper.selectByPrimaryKey(deviceid);
 	}
 	@Override

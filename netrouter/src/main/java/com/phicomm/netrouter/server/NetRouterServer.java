@@ -39,9 +39,9 @@ public class NetRouterServer implements  ServletContextAware, DisposableBean {
 		// config.setIdleTime(IdleStatus.BOTH_IDLE, 10);
 		InetSocketAddress inetSocketAddress = null;
 		try {
-			 inetSocketAddress = new InetSocketAddress("172.17.225.249",PORT);
+//			 inetSocketAddress = new InetSocketAddress("172.17.225.249",PORT);
 			// inetSocketAddress = new InetSocketAddress("10.10.10.237", PORT);
-//			inetSocketAddress = new InetSocketAddress(PORT);
+			inetSocketAddress = new InetSocketAddress(PORT);
 			// inetSocketAddress = new InetSocketAddress("172.17.255.80", PORT);
 			config.setReuseAddress(true);
 			acceptor.bind(inetSocketAddress);

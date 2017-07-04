@@ -3,6 +3,7 @@ package com.phicomm.netrouter.manager.impl;
 import java.util.Date;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,9 @@ import com.phicomm.netrouter.model.DevNtwTopo;
 import com.phicomm.netrouter.model.DevNtwTopoKey;
 import com.phicomm.netrouter.model.DeviceWarning;
 import com.phicomm.netrouter.model.IotDevice;
+import com.phicomm.netrouter.model.SharedStrategy;
 import com.phicomm.netrouter.service.NRService;
+import com.phicomm.netrouter.service.SharedStrategyService;
 
 @Component
 public class DeviceManager implements IDeviceManager {
@@ -23,6 +26,11 @@ public class DeviceManager implements IDeviceManager {
 	
 	@Autowired  
     private NRService netRouterService; 
+	
+	@Autowired
+	private SharedStrategyService sharedStrategyService;
+	
+	private Logger log = Logger.getLogger(DeviceManager.class);
 	
 	Result rt;
 
@@ -100,17 +108,19 @@ public class DeviceManager implements IDeviceManager {
 	public String onlineNotify(Map<String, Object> map) {
 		String manufactureSN = map.get("manufactureSN").toString();
 		String manufacture = map.get("manufacture").toString();
-		//插入之前看看有没有记录，如果有则更新，没有则插入
+		//插入之前需要判断是否存在此记录，如果有则更新，没有则插入
 		int type = Integer.parseInt(map.get("type").toString());
 		IotDevice iotDevice = new IotDevice();
 		int deviceId = isExisting(manufacture, manufactureSN);
 		Date latestTime = new Date();
+		SharedStrategy sharedStrategy = null;
 		if(deviceId>=0){
 			//更新
 			iotDevice.setDeviceid((long)deviceId);
 			iotDevice.setOnline(true);
 			iotDevice.setLatestonlinetime(latestTime);
 			netRouterService.updateDevice(iotDevice);
+			sharedStrategy = sharedStrategyService.selectByDeviceId((long)deviceId);
 		}else{
 			//插入
 			iotDevice.setManufacture(manufacture);
@@ -124,7 +134,7 @@ public class DeviceManager implements IDeviceManager {
 		/*onlineDevice.setDeviceId(deviceId);
 		onlineDevice.setLatestonlinetime(latestTime);
 		onlineDevice.timer(15000);*/
-		return generateAck(type,deviceId);
+		return generateAck(type,deviceId,sharedStrategy);
 	}
 	
 	private int isExisting(String manufacture,String manufactureSN){
@@ -150,6 +160,19 @@ public class DeviceManager implements IDeviceManager {
 		sb.append(",\"deviceId\":"+deviceId+",\"zburl\":\"http://172.17.225.249:8090/zb/\"}");
 		return sb.toString();
 	}
+	
+	private String generateAck(int type,int deviceId,SharedStrategy sharedStrategy){
+		String value1 = generateAck(type,deviceId);
+		if(null==sharedStrategy){
+			log.info("The [id:"+deviceId+"] device is not binded");
+			return value1;
+		}
+		String value2 = JSON.toJSONString(sharedStrategy);
+		StringBuilder sb = new StringBuilder(value1.substring(0, value1.length()-1));
+		sb.append(","+value2.substring(1, value2.length()));
+		return sb.toString();
+	}
+	
 	
 	class Result {
 		int type;

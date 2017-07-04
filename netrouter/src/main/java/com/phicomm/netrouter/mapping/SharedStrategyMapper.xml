@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.phicomm.netrouter.dao.SharedStrategyMapper">
+
+
+	<resultMap id="BaseResultMap" type="com.phicomm.netrouter.model.SharedStrategy">
+		<result column="startSharedTime" property="startSharedTime"
+			jdbcType="TIMESTAMP" />
+		<result column="endSharedTime" property="endSharedTime"
+			jdbcType="TIMESTAMP" />
+		<result column="sharedBW" property="sharedBW" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		startSharedTime,endSharedTime,sharedBW
+	</sql>
+
+	<select id="selectByDeviceId" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from shared_strategy
+		where deviceId = #{deviceId,jdbcType=BIGINT}
+	</select>
+</mapper>
