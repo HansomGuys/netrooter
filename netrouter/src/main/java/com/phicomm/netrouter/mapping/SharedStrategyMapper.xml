@@ -4,15 +4,17 @@
 
 
 	<resultMap id="BaseResultMap" type="com.phicomm.netrouter.model.SharedStrategy">
-		<result column="startSharedTime" property="startSharedTime"
+	<!-- 	<result column="startSharedTime" property="startSharedTime"
 			jdbcType="TIMESTAMP" />
 		<result column="endSharedTime" property="endSharedTime"
-			jdbcType="TIMESTAMP" />
+			jdbcType="TIMESTAMP" /> -->
+		<result column="sharedLock" property="sharedLock"
+			jdbcType="BIT" />
 		<result column="sharedBW" property="sharedBW" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		startSharedTime,endSharedTime,sharedBW
+		<!-- startSharedTime,endSharedTime -->sharedLock,sharedBW
 	</sql>
 
 	<select id="selectByDeviceId" resultMap="BaseResultMap"
