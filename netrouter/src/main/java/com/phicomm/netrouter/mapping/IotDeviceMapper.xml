@@ -35,14 +35,12 @@
 	<insert id="insert" parameterType="com.phicomm.netrouter.model.IotDevice">
 		insert into iot_device (deviceId, manufacture, manufactureSN,
 		online, firstOnlineTime, latestOnlineTime,
-		ipAddr, uplinkBw, downlinkBw,
-		beMaster)
+		ipAddr, uplinkBw, downlinkBw)
 		values (#{deviceid,jdbcType=BIGINT}, #{manufacture,jdbcType=VARCHAR},
 		#{manufacturesn,jdbcType=VARCHAR},
 		#{online,jdbcType=BIT}, #{firstonlinetime,jdbcType=TIMESTAMP},
 		#{latestonlinetime,jdbcType=TIMESTAMP},
-		#{ipaddr,jdbcType=INTEGER}, #{uplinkbw,jdbcType=INTEGER}, #{downlinkbw,jdbcType=INTEGER},
-		#{bemaster,jdbcType=BIT})
+		#{ipaddr,jdbcType=INTEGER}, #{uplinkbw,jdbcType=INTEGER}, #{downlinkbw,jdbcType=INTEGER})
 	</insert>
 
 	<insert id="insertManufactureInfo" parameterType="com.phicomm.netrouter.model.IotDevice">
@@ -187,6 +185,12 @@
 		set 
 		online = #{online,jdbcType=BIT},
 		latestOnlineTime = #{latestonlinetime,jdbcType=TIMESTAMP}
+		where deviceId = #{deviceid,jdbcType=BIGINT}
+	</update>
+	<update id="updateDeviceMasterInfo" parameterType="com.phicomm.netrouter.model.IotDevice">
+		update iot_device
+		set 
+		beMaster = #{beMaster,jdbcType=BIT}
 		where deviceId = #{deviceid,jdbcType=BIGINT}
 	</update>
 </mapper>

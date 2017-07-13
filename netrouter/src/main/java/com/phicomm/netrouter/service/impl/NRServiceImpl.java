@@ -55,6 +55,12 @@ public class NRServiceImpl implements NRService {
 	public int updateDevice(IotDevice iotDevice) {
 		return iotDeviceMapper.updateDevice(iotDevice);
 	}
+	
+	@Override
+	public int updateDeviceMasterInfo(IotDevice iotDevice) {
+		return iotDeviceMapper.updateDeviceMasterInfo(iotDevice);
+	}
+	
 	@Override
 	public boolean isOnline(Long deviceId) {
 		return iotDeviceMapper.isOnline(deviceId);

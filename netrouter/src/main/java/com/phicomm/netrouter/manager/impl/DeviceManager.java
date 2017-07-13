@@ -1,5 +1,10 @@
 package com.phicomm.netrouter.manager.impl;
 
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
 import java.util.Date;
 import java.util.Map;
 
@@ -54,18 +59,26 @@ public class DeviceManager implements IDeviceManager {
 		long topoGroupId = 1;//当前写死
 		String publicIpAddr = map.get("publicIpAddr").toString();
 		int type = Integer.parseInt(map.get("type").toString());
+		boolean beMaster = Integer.parseInt(map.get("beMaster").toString())>=1?true:false;
 		
 		DevNtwTopoKey topoKey = new DevNtwTopoKey();
 		topoKey.setDeviceid(deviceId);
 		topoKey.setTopogroupid(topoGroupId);
 		
 		DevNtwTopo devNtwTopo = netRouterService.getDevNtwTopoByPrimaryKey(topoKey);
+		
+		
 		if(null == devNtwTopo){
 			devNtwTopo = new DevNtwTopo();
 			devNtwTopo.setDeviceid(deviceId);
 			devNtwTopo.setPublicipaddr(publicIpAddr);
 			devNtwTopo.setTopogroupid(topoGroupId);
 			netRouterService.insertDevNtwTopo(devNtwTopo);
+			
+			IotDevice iotDevice = new IotDevice();
+			iotDevice.setDeviceid((long)deviceId);
+			iotDevice.setBeMaster(beMaster);
+			netRouterService.updateDeviceMasterInfo(iotDevice);
 		}
 		return generateAck(type);
 	}
@@ -110,6 +123,10 @@ public class DeviceManager implements IDeviceManager {
 		String manufacture = map.get("manufacture").toString();
 		//插入之前需要判断是否存在此记录，如果有则更新，没有则插入
 		int type = Integer.parseInt(map.get("type").toString());
+		
+		int upnpPort = Integer.parseInt(map.get("upnpPort").toString());
+		String publicIpAddr = map.get("publicIpAddr").toString();
+		startUdp(upnpPort,publicIpAddr);
 		IotDevice iotDevice = new IotDevice();
 		int deviceId = isExisting(manufacture, manufactureSN);
 		Date latestTime = new Date();
@@ -137,6 +154,26 @@ public class DeviceManager implements IDeviceManager {
 		return generateAck(type,deviceId,sharedStrategy);
 	}
 	
+	private void startUdp(int port, String ip) {
+		final UDPServer udpServer = new UDPServer(port, ip);
+		final String sendStr = "OK";
+		Thread thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				udpServer.send(sendStr);
+			}
+		});
+		thread.start();
+		try {
+			Thread.sleep(2000);
+			udpServer.dispose(); 
+			thread.interrupt();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	private int isExisting(String manufacture,String manufactureSN){
 		int deviceId; 
 		try {
@@ -192,6 +229,48 @@ public class DeviceManager implements IDeviceManager {
 
 		public void setRet(int ret) {
 			this.ret = ret;
+		}
+
+	}
+	
+	class UDPServer {
+	    private DatagramSocket dataSocket;
+	    private DatagramPacket sendPacket;
+	    private byte sendDataByte[];
+	    private int port;
+	    private InetAddress ip;
+
+	    public UDPServer(int port, String ip) {
+	        init(port,ip);
+	    }
+	    
+	    public void init(int port,String ip) {
+	        try {
+	        	dataSocket = new DatagramSocket();
+	            this.port = port;
+	            this.ip = InetAddress.getByName(ip);
+	            sendDataByte = new byte[1024];
+	            log.info("UpnpPort :"+port+"--- Public Ip Address :"+ip);
+	        }catch (IOException ie) {
+	            ie.printStackTrace();
+	        }
+	    }
+
+	    public void dispose() {
+	    	dataSocket.close();
+	    	log.info("The connection via udp is off");
+		}
+
+		public void send(String value) {
+			try {
+				sendDataByte = value.getBytes();
+				sendPacket = new DatagramPacket(sendDataByte, sendDataByte.length,ip, port);
+				dataSocket.send(sendPacket);
+				log.info("send a message via udp protocol");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 		}
 
 	}

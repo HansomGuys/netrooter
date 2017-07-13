@@ -20,8 +20,8 @@ public class IotDevice {
     private Integer uplinkbw;
 
     private Integer downlinkbw;
-
-    private Boolean bemaster;
+    
+    private Boolean beMaster;
 
     public Long getDeviceid() {
         return deviceid;
@@ -95,11 +95,11 @@ public class IotDevice {
         this.downlinkbw = downlinkbw;
     }
 
-    public Boolean getBemaster() {
-        return bemaster;
-    }
+	public Boolean getBeMaster() {
+		return beMaster;
+	}
 
-    public void setBemaster(Boolean bemaster) {
-        this.bemaster = bemaster;
-    }
+	public void setBeMaster(Boolean beMaster) {
+		this.beMaster = beMaster;
+	}
 }

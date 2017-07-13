@@ -23,5 +23,7 @@ public interface NRService {
 	boolean isOnline(Long deviceid);
 
 	void offLine(long deviceId);
+	
+	int updateDeviceMasterInfo(IotDevice iotDevice);
 
 }
